@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2022/07/05/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title>人造美满</title>
+    <url>/2022/07/10/2022-07-10/</url>
+    <content><![CDATA[<p>花了一个小时复现了当初写了一天的Java项目，简单到简陋的一个ATM系统。键盘狂敲出一块块逻辑，自顶向下的设计过程中有种拨云见日的快感。</p>
+<p>完成之后，花了一点点时间做了给自己的一个彩蛋，两位用户可以借用转账功能简单交流。彩蛋悲伤而安静，你操控着自己开出的两个账户，赋予他们不同的身份，进行着现实世界中不可能进行或不再会有的对话。</p>
+<p>我们用充斥bug的代码构建了一个庞大的虚拟世界，我们在里面交流、创造、娱乐，我们在里面生活。虚拟与现实生活相互映射，现实中的遗憾在这里或许也会美好一点。我们用人造的缺憾构建着美满，尽管追求美满的世界是一座斑驳的海市蜃楼，尽管美满本身便是一场荒谬的大梦。</p>
 ]]></content>
       <categories>
-        <category>Hello</category>
+        <category>人间朝暮</category>
       </categories>
       <tags>
-        <tag>tech</tag>
+        <tag>日记</tag>
+        <tag>代码</tag>
       </tags>
   </entry>
 </search>
