@@ -1,18 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>dddd</title>
-    <url>/2022/07/31/2022-07-10/</url>
-    <content><![CDATA[<p>花了一个小时复现了当初写了一天的Java项目，简单到简陋的一个ATM系统。键盘狂敲出一块块逻辑，自顶向下的设计过程中有种拨云见日的快感。</p>
-<p>完成之后，花了一点点时间做了给自己的一个彩蛋，两位用户可以借用转账功能简单交流。彩蛋悲伤而安静，你操控着自己开出的两个账户，赋予他们不同的身份，进行着现实世界中不可能进行或不再会有的对话。</p>
-<p>我们用充斥bug的代码构建了一个庞大的虚拟世界，我们在里面交流、创造、娱乐，我们在里面生活。虚拟与现实生活相互映射，现实中的遗憾在这里或许也会美好一点。我们用人造的缺憾构建着美满，尽管追求美满的世界是一座斑驳的海市蜃楼，尽管美满本身便是一场荒谬的大梦。</p>
-]]></content>
+    <title>7月22号日报</title>
+    <url>/2022/08/01/7-22/</url>
+    <content><![CDATA[]]></content>
       <categories>
-        <category>dddd</category>
+        <category>日报</category>
       </categories>
       <tags>
-        <tag>日记</tag>
-        <tag>代码</tag>
+        <tag>日报</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>7月21号日报</title>
+    <url>/2022/08/01/7-21/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>日报</category>
+      </categories>
+      <tags>
+        <tag>日报</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>7月20号日报</title>
+    <url>/2022/08/01/7-20/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>日报</category>
+      </categories>
+      <tags>
+        <tag>日报；</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>7月19号日报</title>
+    <url>/2022/08/01/7-19%E5%8F%B7%E6%97%A5%E6%8A%A5/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>日报</category>
+      </categories>
+      <tags>
+        <tag>日报；</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>7月18号日报</title>
+    <url>/2022/08/01/7-18%E5%8F%B7%E6%97%A5%E6%8A%A5/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>日报</category>
+      </categories>
+      <tags>
+        <tag>日报</tag>
       </tags>
   </entry>
 </search>
