@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* container */
+.container {
+    width: 600px;
+    height: 350px;
+    overflow: hidden;
+    position: relative;
+    margin: 100px auto;
+
+}
+
+
+/* wrapper */
+.wraper {
+    width: 3000px;
+    height: 350px;
+    z-index: 1;
+    position: absolute;
+
+}
+
+.wraper img {
+    width: 600px;
+    height: 350px;
+    float: left;
+}
+
+/* button */
+.button {
+    width: 200px;
+    height: 40px;
+    z-index: 2;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    margin-left: -50px;
+
+}
+
+.button .btn-num {
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+    display: inline-block;
+    background-color: #FFF;
+    border-radius: 50%;
+    text-align: center;
+    color: aqua;
+    cursor: pointer;
+}
+
+.button .on {
+    background-color: #F60;
+}
+
+/* 箭头 */
+.container .arrow {
+    position: absolute;
+    width: 30px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    top: 35%;
+    font-size: 36px;
+    z-index: 2;
+    display: none;
+    background-color: rgba(207, 207, 207, 0.7);
+    color: rgb(221, 221, 221);
+}
+
+.container .arrow_left {
+    left: 5px;
+}
+
+.container .arrow_right {
+    right: 5px;
+}
+
+.container:hover .arrow {
+    display: block;
+    /* color: rgb(153,153,153); */
+    color: lightsteelblue;
+}
