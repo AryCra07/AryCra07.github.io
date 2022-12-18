@@ -20,25 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Hasta la victoria siempre.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="AryCra_07&#39;s Blog">
-<meta property="og:url" content="http://example.com/archives/2022/12/index.html">
+    <meta name="description" content="本文主要总结组合数学第一章部分的原理和习题  鸽巢原理 Ramsey问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【组合数学】1 鸽巢原理">
+<meta property="og:url" content="http://example.com/2022/12/18/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6%E7%AC%AC%E4%B8%80%E7%AB%A0/index.html">
 <meta property="og:site_name" content="AryCra_07&#39;s Blog">
-<meta property="og:description" content="Hasta la victoria siempre.">
+<meta property="og:description" content="本文主要总结组合数学第一章部分的原理和习题  鸽巢原理 Ramsey问题">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-18T02:51:53.815Z">
+<meta property="article:modified_time" content="2022-12-18T19:28:58.892Z">
 <meta property="article:author" content="AryCra_07">
+<meta property="article:tag" content="组合数学">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/archives/2022/12/">
+<link rel="canonical" href="http://example.com/2022/12/18/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6%E7%AC%AC%E4%B8%80%E7%AB%A0/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"archives/2022/12/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/12/18/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6%E7%AC%AC%E4%B8%80%E7%AB%A0/","path":"2022/12/18/组合数学第一章/","title":"【组合数学】1 鸽巢原理"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>归档 | AryCra_07's Blog</title>
+<title>【组合数学】1 鸽巢原理 | AryCra_07's Blog</title>
   
 
 
@@ -68,7 +71,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">AryCra_07's Blog</h1>
+      <p class="site-title">AryCra_07's Blog</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">思考，技术与生活</p>
@@ -128,7 +131,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -141,6 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%B8%BD%E5%B7%A2%E5%8E%9F%E7%90%86%E7%9A%84%E7%AE%80%E5%8D%95%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">1.1 鸽巢原理的简单形式</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -207,49 +211,179 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 1 篇日志。 继续努力。</span>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/18/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6%E7%AC%AC%E4%B8%80%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.png">
+      <meta itemprop="name" content="AryCra_07">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AryCra_07's Blog">
+      <meta itemprop="description" content="Hasta la victoria siempre.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【组合数学】1 鸽巢原理 | AryCra_07's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【组合数学】1 鸽巢原理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-12-18 10:51:53" itemprop="dateCreated datePublished" datetime="2022-12-18T10:51:53+08:00">2022-12-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-19 03:28:58" itemprop="dateModified" datetime="2022-12-19T03:28:58+08:00">2022-12-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">组合数学</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文主要总结组合数学第一章部分的原理和习题</p>
+<ul>
+<li>鸽巢原理</li>
+<li>Ramsey问题</li>
+</ul>
+<span id="more"></span>
+<h2 id="鸽巢原理的简单形式">1.1 鸽巢原理的简单形式</h2>
+<p><strong>定理1.1.1</strong> 如果把 <span
+class="math inline">\(n+1\)</span> 个物品放入 <span
+class="math inline">\(n\)</span>
+个盒子中，那么至少有一个盒子有两个或更多的物品。</p>
+<blockquote>
+<p><strong>例1 证明：从 <span class="math inline">\(1\sim n\)</span>
+的正整数中任取 <span class="math inline">\(n+1\)</span> 个，则这 <span
+class="math inline">\(n+1\)</span> 个数中一定有两个数互质。</strong></p>
+<p>解：我们可以将 <span class="math inline">\(1\sim 2n\)</span> 划分成
+<span class="math inline">\(n\)</span> 个数对：<span
+class="math inline">\(\lbrace(1,2),(3,4),...,(2n-1,2n)\rbrace\)</span>。已知每个数对中两数互质，由鸽巢原理，任取的
+<span class="math inline">\(n+1\)</span>
+个数中至少有两个数属于同一数对，即互质。</p>
+<p><strong>例2 证明：从 <span class="math inline">\(1\sim 2n\)</span>
+的正整数中任取 <span class="math inline">\(n+1\)</span> 个，则这 <span
+class="math inline">\(n+1\)</span>
+个数中至少有一对数，其中一个是另一个的倍数。</strong></p>
+<p>解：已知任一正整数都可以表示成 <span class="math inline">\(A\times
+2^B\)</span>，其中 <span class="math inline">\(A\)</span> 为奇数，<span
+class="math inline">\(B\)</span> 为非负整数。显然，<span
+class="math inline">\(1\sim 2n\)</span> 之间只有 <span
+class="math inline">\(n\)</span> 个奇数。由鸽巢原理，在 <span
+class="math inline">\(1\sim 2n\)</span> 中任取 <span
+class="math inline">\(n+1\)</span> 个数，必存在两个数在 <span
+class="math inline">\(A\times 2^B\)</span> 的形式下对应着相同的 <span
+class="math inline">\(A\)</span>，即一个是另一个的倍数。</p>
+<p><strong>例3 一位象棋大师以11
+周时间准备一次比赛，他决定每天至少下一盘棋，为了不至于太累，他限定每一周不多于12
+盘对局，证明，存在连续若干天，在这些天中他恰下了21 盘棋。</strong></p>
+<p>解：令 <span class="math inline">\(A_i\)</span> 为每天对局数，<span
+class="math inline">\(B_i\)</span> 为第 <span
+class="math inline">\(1\sim i\)</span> 天对局数之和，易得 <span
+class="math inline">\(B_i\)</span> 是严格递增的。有 <span
+class="math display">\[
+1\le B_1,...,B_{77}\le 132\qquad (1)
+\]</span></p>
+<p><span class="math display">\[
+22\le B_1+21,...,B_{77}+21\le 153\qquad (2)
+\]</span></p>
+<p>联立 (1) (2) 两式： <span class="math display">\[
+1\le \lbrace B_1,...,B_{77}\rbrace\; \lbrace
+B_1+21,...,B_{77}+21\rbrace\le 153
+\]</span> 中间部分共 154 个数，而 <span class="math inline">\(1\sim
+153\)</span> 共有 153 个数字。又因为 <span
+class="math inline">\(B_i\)</span>
+严格递增（互不相等），所以至少存在一对 <span
+class="math inline">\(i,j\in[1,77]\)</span> 使得 <span
+class="math inline">\(B_i=B_j+21\)</span>，即在第 <span
+class="math inline">\(j+1\sim i\)</span> 天中他恰下了21盘棋。</p>
+<p><strong>例4 证明任意给定的52
+个整数中，总存在两个数，它们的和或差能被100 整除。</strong></p>
+<p>解：我们证明该命题的加强形式：在任意给定的52
+个整数中，总存在两个数，它们的<strong>和</strong>能被100 整除。</p>
+<p>对于 <span class="math inline">\(\forall x\in Z\)</span>，都有 <span
+class="math inline">\(x\:mod\:100\in S=\lbrace
+0,1,2,...,99\rbrace\)</span>。将这个集合内的元素按<strong>两数之和为100</strong>组成二元数对集合：<span
+class="math inline">\(P=\lbrace
+(0,0),(1,99),..,(50,50)\rbrace\)</span>。易得若整数 <span
+class="math inline">\(a\)</span>，<span
+class="math inline">\(b\)</span>对 100 取余的余数属于同一个数对，则可得
+<span class="math inline">\((a+b)\:mod\:100=0\)</span>，命题得证。</p>
+<p>因为 <span class="math inline">\(P\)</span> 中共有 51
+个集合，所以由鸽巢原理，对于任意给定的 52 个整数，必定有 2 个整数对 100
+取余的结果属于同一个数对，即它们的和能被 100 整除。故命题得证。</p>
+</blockquote>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-12-18T10:51:53+08:00"
-              content="2022-12-18">
-          12-18
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/12/18/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6%E7%AC%AC%E4%B8%80%E7%AB%A0/" itemprop="url">
-            <span itemprop="name">【组合数学】1 鸽巢原理</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i> 组合数学</a>
+          </div>
 
-      
-    </header>
+        
+
+    </footer>
   </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
 
 </div>
   </main>
