@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon1.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon1.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon1.jpg">
+  <link rel="mask-icon" href="/images/icon1.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="深入 echarts 悬浮提示窗 Vue 页面设置切屏选项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hufu前端工程实践1">
+<meta property="og:url" content="http://example.com/2023/06/06/hufu%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B51/index.html">
+<meta property="og:site_name" content="AryCra_07&#39;s Blog">
+<meta property="og:description" content="深入 echarts 悬浮提示窗 Vue 页面设置切屏选项">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/echarts1.png">
+<meta property="og:image" content="http://example.com/images/echarts2.png">
+<meta property="og:image" content="http://example.com/images/2023-6-6-1.png">
+<meta property="article:published_time" content="2023-06-06T13:52:09.220Z">
+<meta property="article:modified_time" content="2023-06-06T15:04:02.551Z">
+<meta property="article:author" content="AryCra_07">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="VUE">
+<meta property="article:tag" content="echarts">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/echarts1.png">
+
+
+<link rel="canonical" href="http://example.com/2023/06/06/hufu%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B51/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/06/06/hufu%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B51/","path":"2023/06/06/hufu前端工程实践1/","title":"hufu前端工程实践1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>hufu前端工程实践1 | AryCra_07's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">AryCra_07's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">思考，技术与生活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-成于思"><a href="/think/" rel="section"><i class="fa fa-lightbulb fa-fw"></i>成于思</a></li><li class="menu-item menu-item-知无涯"><a href="/study/" rel="section"><i class="fa fa-book fa-fw"></i>知无涯</a></li><li class="menu-item menu-item-通天塔"><a href="/tech/" rel="section"><i class="fa fa-code fa-fw"></i>通天塔</a></li><li class="menu-item menu-item-好望角"><a href="/life" rel="section"><i class="fa fa-compass fa-fw"></i>好望角</a></li><li class="menu-item menu-item-关于"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B1%E5%85%A5-echarts-%E6%82%AC%E6%B5%AE%E6%8F%90%E7%A4%BA%E7%AA%97"><span class="nav-number">1.</span> <span class="nav-text">深入 echarts 悬浮提示窗</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-%E9%A1%B5%E9%9D%A2%E8%AE%BE%E7%BD%AE%E5%88%87%E5%B1%8F%E9%80%89%E9%A1%B9"><span class="nav-number">2.</span> <span class="nav-text">Vue 页面设置切屏选项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bug"><span class="nav-number">2.1.</span> <span class="nav-text">Bug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E5%A4%8D"><span class="nav-number">2.2.</span> <span class="nav-text">修复</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="AryCra_07"
+      src="/images/avatar1.png">
+  <p class="site-author-name" itemprop="name">AryCra_07</p>
+  <div class="site-description" itemprop="description">Hasta la victoria siempre.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AryCra07" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AryCra07" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:703810491@qq.com" title="E-Mail → mailto:703810491@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/AryCra07" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/06/hufu%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B51/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.png">
+      <meta itemprop="name" content="AryCra_07">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AryCra_07's Blog">
+      <meta itemprop="description" content="Hasta la victoria siempre.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="hufu前端工程实践1 | AryCra_07's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hufu前端工程实践1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-06 21:52:09 / 修改时间：23:04:02" itemprop="dateCreated datePublished" datetime="2023-06-06T21:52:09+08:00">2023-06-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ul>
+<li>深入 echarts 悬浮提示窗</li>
+<li>Vue 页面设置切屏选项</li>
+</ul>
+<span id="more"></span>
+<h1 id="深入-echarts-悬浮提示窗">深入 echarts 悬浮提示窗</h1>
+<p>在用 echarts 生成图表的时候，我们可以设置 <a target="_blank" rel="noopener" href="https://echarts.apache.org/zh/option.html#tooltip"><code>tooltip</code></a>
+属性生成悬浮窗，通过鼠标悬浮展示当前位置的详细数据。例如，这段代码可以生成如下悬浮窗：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tooltip</span>: {</span><br><span class="line">  <span class="attr">trigger</span>: <span class="string">'axis'</span>,</span><br><span class="line">  <span class="attr">axisPointer</span>: {</span><br><span class="line">    <span class="attr">type</span>: <span class="string">'cross'</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">padding</span>: [<span class="number">5</span>, <span class="number">10</span>]</span><br><span class="line">},</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>trigger</code>：触发类型。
+<ul>
+<li><code>'axis'</code>：
+指定触发提示窗的方式为在坐标轴上的轴线上触发，也就是当鼠标悬停在图表上的时候显示提示窗。</li>
+</ul></li>
+<li><code>axisPointer</code>：坐标轴指示器配置项，功能优先级低于轴上的
+axisPointer。
+<ul>
+<li><code>type: 'cross'</code>：指定提示窗的指示器类型为交叉指示器，交叉指示器会在X轴和Y轴上都显示一个十字准星，方便用户对鼠标所在位置的数据进行查看。</li>
+</ul></li>
+</ul>
+<p><img src="/images/echarts1.png"></p>
+<p>但简单生成的悬浮提示框往往没有单位，导致信息不够直观完善。我通过
+<code>tooltip</code> 的 <a target="_blank" rel="noopener" href="https://echarts.apache.org/zh/option.html#tooltip.formatter"><code>formatter</code></a>
+选项进行代码改进：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tooltip</span>: {</span><br><span class="line">  <span class="attr">trigger</span>: <span class="string">'axis'</span>,</span><br><span class="line">  <span class="attr">axisPointer</span>: {</span><br><span class="line">    <span class="attr">type</span>: <span class="string">'cross'</span></span><br><span class="line">  },</span><br><span class="line">  <span class="attr">padding</span>: [<span class="number">5</span>, <span class="number">10</span>],</span><br><span class="line">  <span class="attr">formatter</span>: <span class="keyword">function</span>(<span class="params">params</span>) {</span><br><span class="line">    <span class="keyword">let</span> tooltipContent = <span class="string">''</span></span><br><span class="line">    params.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">item</span>) {</span><br><span class="line">      <span class="keyword">const</span> seriesName = item.<span class="property">seriesName</span></span><br><span class="line">      <span class="keyword">const</span> value = item.<span class="property">value</span></span><br><span class="line">      <span class="keyword">let</span> unit = <span class="string">''</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// assign unit based on series name</span></span><br><span class="line">      <span class="keyword">if</span> (seriesName === <span class="string">'CPU占用率'</span> || seriesName === <span class="string">'内存占用率'</span> || seriesName === <span class="string">'磁盘占用率'</span>) {</span><br><span class="line">        unit = <span class="string">'%'</span></span><br><span class="line">      } <span class="keyword">else</span> <span class="keyword">if</span> (seriesName === <span class="string">'网络流量流入'</span> || seriesName === <span class="string">'网络流量流出'</span>) {</span><br><span class="line">        unit = <span class="string">'Mb/s'</span></span><br><span class="line">      }</span><br><span class="line"></span><br><span class="line">      <span class="comment">// add unit to data</span></span><br><span class="line">      tooltipContent += seriesName + <span class="string">': '</span> + value + <span class="string">' '</span> + unit + <span class="string">'&lt;br&gt;'</span></span><br><span class="line">    })</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tooltipContent</span><br><span class="line">  }</span><br><span class="line">},</span><br></pre></td></tr></table></figure>
+<p><img src="/images/echarts2.png"></p>
+<h1 id="vue-页面设置切屏选项">Vue 页面设置切屏选项</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	...</span><br><span class="line">    &lt;el-row type="flex" justify="space-between" class="row_spacing"&gt;</span><br><span class="line">    	&lt;el-col :span="4"&gt;</span><br><span class="line">            &lt;el-radio-group v-model="radio" @change="changeArea"&gt;</span><br><span class="line">                &lt;el-radio-button id="1" :label="$t('config')" /&gt;</span><br><span class="line">                &lt;el-radio-button id="2" :label="$t('status')" /&gt;</span><br><span class="line">            &lt;/el-radio-group&gt;</span><br><span class="line">        &lt;/el-col&gt;</span><br><span class="line"></span><br><span class="line">        &lt;el-col :span="20" class="clearfix"&gt;</span><br><span class="line">          // 已经存在的其他按钮</span><br><span class="line">        &lt;/el-col&gt;</span><br><span class="line">    &lt;/el-row&gt;</span><br><span class="line">	...</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+<p>这里用到了 <code>element-ui</code>，<code>el-col</code> 默认分为 24
+份，我给需要添加的两个按钮（<strong>配置</strong>和<strong>状态</strong>）分了
+”4“ 的空间。</p>
+<ul>
+<li><code>v-model="radio"</code> 表示将 <code>radio</code> 变量与
+<code>&lt;el-radio-group&gt;</code>
+组件的选中状态进行双向绑定。当选中状态发生变化时，<code>radio</code>
+变量的值也会相应更新</li>
+<li><code>@change="changeArea"</code> 则是监听
+<code>&lt;el-radio-group&gt;</code> 的 change
+事件，并在事件触发时调用名为 <code>changeArea</code> 的方法</li>
+<li><em><code>$t</code> 是 Vue I18n 提供的一个函数，用于在 Vue
+组件中获取翻译文本。通过 <code>$t('config')</code>，你可以获取名为
+<code>'config'</code> 的翻译文本</em></li>
+</ul>
+<p>接着我们在 <code>method</code> 区域实现
+<code>changeArea</code>，总体思路是根据 <code>radio</code>
+控制两个段落的显示</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">changeArea</span>(<span class="params"></span>) {</span><br><span class="line">  <span class="keyword">const</span> config = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">'config'</span>)</span><br><span class="line">  <span class="keyword">const</span> status = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">'status'</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">switch</span> (<span class="variable language_">this</span>.<span class="property">radio</span>) {</span><br><span class="line">    <span class="keyword">case</span> <span class="variable language_">this</span>.$t(<span class="string">'config'</span>):</span><br><span class="line">      config.<span class="property">style</span>.<span class="property">display</span> = <span class="string">'block'</span></span><br><span class="line">      status.<span class="property">style</span>.<span class="property">display</span> = <span class="string">'none'</span></span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> <span class="variable language_">this</span>.$t(<span class="string">'status'</span>):</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">showStatus</span> = <span class="string">'true'</span></span><br><span class="line">      config.<span class="property">style</span>.<span class="property">display</span> = <span class="string">'none'</span></span><br><span class="line">      status.<span class="property">style</span>.<span class="property">display</span> = <span class="string">'block'</span></span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">  }</span><br><span class="line">},</span><br></pre></td></tr></table></figure>
+<p>同时，我还希望点进页面的时候默认显示<strong>配置</strong>内容，那么只需要在
+<code>data</code> 中加入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">data</span>(<span class="params"></span>) {</span><br><span class="line">  <span class="keyword">return</span> {</span><br><span class="line">    <span class="attr">radio</span>: <span class="variable language_">this</span>.$t(<span class="string">'config'</span>),</span><br><span class="line">  }</span><br><span class="line">},</span><br></pre></td></tr></table></figure>
+<h2 id="bug">Bug</h2>
+<ul>
+<li>问题一在于，初始的时候不会调用
+<code>changeArea</code>，我很痛苦的发现两个段落同时工作了（现在发现不会出现，应该是个未定义的bug）。
+<ul>
+<li>方案一：我在 <a target="_blank" rel="noopener" href="https://cn.vuejs.org/api/options-lifecycle.html#mounted"><code>mounted</code></a>
+生命周期中调用 <code>changeArea</code>
+函数，在组件被挂载之后调用函数显然可以修复这一问题。</li>
+</ul></li>
+<li>问题二在于，采用方案一后<strong>状态</strong>对应的图表不再加载，除非我改变页面大小。这个问题很诡异，迫使我另辟蹊径去解决问题一。</li>
+</ul>
+<h2 id="修复">修复</h2>
+<p>自始至终的问题在<strong>状态</strong>这一选项上，初始化时它作为不速之客蹦出来，改正后又姗姗不来。所以我在
+<code>data</code> 中添加了 <code>showStatus</code> 这一参数并初始化为
+<code>false</code>，并在状态段落添加 <code>v-if="showStatus"</code>
+属性。在 <code>changeArea</code> 触发 <code>status</code> 条件后才会置为
+<code>true</code>。这样，就完美控制了<strong>状态</strong>段落的显示。</p>
+<p><img src="/images/2023-6-6-1.png"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+              <a href="/tags/VUE/" rel="tag"><i class="fa fa-tag"></i> VUE</a>
+              <a href="/tags/echarts/" rel="tag"><i class="fa fa-tag"></i> echarts</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/12/%E4%B9%92%E4%B9%93%E6%9C%AD%E8%AE%B0/" rel="prev" title="乒乓札记">
+                  <i class="fa fa-chevron-left"></i> 乒乓札记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa-brands fa-galactic-republic"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AryCra_07 | CC BY-NC 4.0</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":"all","tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.1/es5/tex-mml-chtml.js","integrity":"sha256-hlC2uSQYTmPsrzGZTEQEg9PZ1a/+SV6VBCTclohf2og="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
