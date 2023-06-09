@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>虎符前端工程实践2</title>
+    <url>/2023/06/09/%E8%99%8E%E7%AC%A6%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B52/</url>
+    <content><![CDATA[<ul>
+<li>如何限制段落最大显示字数</li>
+</ul>
+<span id="more"></span>
+<h1 id="vue-实现限制段落字数">Vue 实现限制段落字数</h1>
+<h2 id="原版代码及显示">原版代码及显示：</h2>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item-warn-board"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row_spacing"</span> <span class="attr">v-if</span>=<span class="string">"AlertList.length &gt; 0"</span> <span class="attr">v-for</span>=<span class="string">"i in 5"</span> <span class="attr">style</span>=<span class="string">"text-align: left;margin-bottom: 8px"</span>&gt;</span></span><br><span class="line">    {{ AlertList[i].annotations.summary }}</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/2023-6-9-1.png"></p>
+<p>我们需要将每段告警限制在一行之内，并将多余字符以 <code>...</code>
+替换</p>
+<h2 id="vue-实现">Vue 实现</h2>
+<p>在 <code>methods</code> 中添加如下方法：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">truncateText</span>(<span class="params">text, maxLength</span>) {</span><br><span class="line">  <span class="keyword">if</span> (text.<span class="property">length</span> &gt; maxLength) {</span><br><span class="line">    <span class="keyword">return</span> text.<span class="title function_">slice</span>(<span class="number">0</span>, maxLength) + <span class="string">'...'</span></span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">return</span> text</span><br><span class="line">},</span><br></pre></td></tr></table></figure>
+<p>再在 <code>template</code> 中将页面改成：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item-warn-board"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row_spacing"</span> <span class="attr">v-if</span>=<span class="string">"AlertList.length &gt; 0"</span> <span class="attr">v-for</span>=<span class="string">"i in 5"</span> <span class="attr">style</span>=<span class="string">"text-align: left;margin-bottom: 10px"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"bullet"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    {{ truncateText(AlertList[i].annotations.summary, 47) }}</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这样，我们便成功地实现限制文本长度的功能：</p>
+<p><img src="/images/2023-6-9-2.png"></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>虎符</tag>
+        <tag>前端</tag>
+        <tag>VUE</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>虎符前端工程实践1</title>
     <url>/2023/06/06/%E8%99%8E%E7%AC%A6%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B51/</url>
     <content><![CDATA[<ul>
@@ -77,6 +107,7 @@ axisPointer。
         <category>前端</category>
       </categories>
       <tags>
+        <tag>虎符</tag>
         <tag>前端</tag>
         <tag>VUE</tag>
         <tag>echarts</tag>
