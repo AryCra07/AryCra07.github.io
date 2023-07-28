@@ -1,12 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SWS3004-Lecture 1: Concepts and Models</title>
+    <url>/2023/07/28/SWS3004-Lecture-1/</url>
+    <content><![CDATA[<ul>
+<li>NIST Definition</li>
+<li>Cloud Characteristics</li>
+<li>Cloud Service(Delivery) Models</li>
+<li>Conceptual Reference Architecture</li>
+<li>Cloud Deployment Models</li>
+<li>Summary</li>
+</ul>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>云开发</category>
+      </categories>
+      <tags>
+        <tag>Cloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SWS3004-Lab Exercise 2</title>
+    <url>/2023/07/28/AWS-Lab2/</url>
+    <content><![CDATA[<p>This Lab is about Hadoop and Spark, using AWS EMR and S3.</p>
+<span id="more"></span>
+<h1 id="exercise-2.1">Exercise 2.1</h1>
+<blockquote>
+<p>Run and compare the execution time of WordCount on Wikipidia’s dump
+with both Hadoop MapReduce and Spark. You can use either IaaS or PaaS,
+but make sure you use the same type of setup for both Hadoop and Spark
+(e.g., if you use EMR for Hadoop MapReduce, then use EMR for Spark
+also). You have to use the provided input of size 12 GB. Is there any
+difference in the programming model and ease of programming? Is there
+any difference in performance? Please explain it in maximum 3
+paragraphs. You can include up to 2 performance plots.</p>
+<p>Input dataset address on AWS S3:
+s3://sws3004-2023/input/enwiki-12GB.xml</p>
+<p>You must use this input dataset for both Hadoop MapReduce and
+Spark.</p>
+<p>(Tip: use the entire address s3://sws3004-2023/input/enwiki-12GB.xml
+as parameter to your MapReduce job)</p>
+</blockquote>
+<h3 id="part-1.-hadoop-mapreduce">Part 1. Hadoop Mapreduce</h3>
+<p>First I create a S3 bucket and upload files:</p>
+<p><img src="/images/sws3004-lab2/722-1.png" alt="S3 bucket"></p>
+<p>Then I create an EMR cluster, select the S3 bucket created in the
+previous step as my S3 folder, and select m4.large and default 3
+instances as the instance configuration.</p>
+<p><img src="/images/sws3004-lab2/722-3.png" alt="EMR"></p>
+<p>Now add a step, using <code>WordCount.jar</code> to process the input
+from <code>s3://sws3004-2023/input/enwiki-12GB.xml</code>.</p>
+<p><img src="/images/sws3004-lab2/722-6.png" alt="EMR Step"></p>
+<p>In my S3 bucket, I can check the output when the step finished.</p>
+<p><img src="/images/sws3004-lab2/722-9.png" alt="Check the Output"></p>
+<p><strong>Hadoop MapReduce performance:</strong> The process takes 42
+minutes totally.</p>
+<p><img src="/images/sws3004-lab2/722-8.png" alt="Hadoop MapReduce Performance"></p>
+<h3 id="part-2.-spark">Part 2. Spark</h3>
+<p>I clear the S3 bucket and upload the files of Spark:</p>
+<p><img src="/images/sws3004-lab2/722-17.png" alt="Spark"></p>
+<p>Then create a new EMR for Spark, and add a step.</p>
+<p><img src="/images/sws3004-lab2/722-18.png" alt="EMR Step"></p>
+<p><strong>Spark performance:</strong> The process takes 16 minutes
+totally.</p>
+<p><strong>It seems that Spark is better than Hadoop in performance.
+</strong> The reason is Hadoop uses disk to store data while Spark uses
+memory to store data, which can reduce the I/O time. Also, MapReduce
+requires a lot of time to sort during Shuffle, and sorting seems
+inevitable in MapReduce's Shuffle. When Spark is in Shuffle, sorting is
+only required for some situations, which is faster.</p>
+<h3 id="is-there-any-difference-in-the-programming-model-and-ease-of-programming">Is
+there any difference in the programming model and ease of
+programming?</h3>
+<p><strong>Hadoop MapReduce:</strong> Hadoop MapReduce is a programming
+model designed for distributed data processing on large clusters of
+commodity hardware. The MapReduce programming model has two steps to
+process our data: Map and Reduce.</p>
+<ul>
+<li><strong>Map:</strong> In the Map phase, the input data is divided
+into splits, and each split is processed independently by multiple
+mapper tasks in parallel. The mapper tasks extract key-value pairs from
+the input data and emit intermediate key-value pairs.</li>
+<li><strong>Shuffle and Sort:</strong> The intermediate key-value pairs
+emitted by the mappers are shuffled and sorted based on the keys. This
+step ensures that all values for the same key are grouped together and
+sent to the same reducer task.</li>
+<li><strong>Reduce:</strong> In the Reduce phase, the sorted and
+shuffled intermediate data is processed by reducer tasks. Each reducer
+task processes a subset of the intermediate data, grouped by keys. The
+reducer tasks aggregate the values associated with each key and produce
+the final output.</li>
+</ul>
+<p><strong>Spark:</strong> <strong>Spark is a better distributed data
+processing engine</strong>, which extends the MapReduce model and offers
+more versatility and performance improvements. Spark introduces the
+concept of Resilient Distributed Datasets (RDDs), which are the
+fundamental data abstraction in Spark. RDDs are distributed collections
+of data that can be processed in parallel.</p>
+<p>Spark provides a more general programming model compared to Hadoop
+MapReduce. It supports not only Map and Reduce operations but also
+various other transformations and actions on RDDs, such as filter, join,
+groupByKey, reduceByKey and so on. Additionally, Spark offers
+specialized libraries like Spark SQL for structured data processing,
+Spark Streaming for real-time data streaming, and MLlib for machine
+learning tasks.</p>
+<p><strong>Difference in Programming Model and Ease of
+Programming:</strong></p>
+<p>I found a comparison form in Lecture slides:</p>
+<p><img src="/images/sws3004-lab2/722-7.jpg" alt="Comparision"></p>
+<ol type="1">
+<li><strong>Programming Model:</strong>
+<ul>
+<li>Hadoop MapReduce has a more rigid programming model, where data is
+processed in two distinct phases (Map and Reduce), and users need to
+explicitly handle intermediate data shuffle and sort.</li>
+<li>Spark provides a more flexible and expressive programming model with
+RDDs, allowing users to perform complex operations on distributed data
+through a wide range of transformations and actions.</li>
+</ul></li>
+<li><strong>Ease of Programming:</strong>
+<ul>
+<li>Spark generally offers better ease of programming due to its
+high-level APIs and expressive transformations and actions on RDDs. It
+simplifies the development of distributed data processing applications,
+and its concise syntax often leads to shorter and more readable code
+compared to Hadoop MapReduce.</li>
+<li>Hadoop MapReduce, being more low-level, might require developers to
+write additional code for tasks like intermediate data serialization and
+deserialization, which can make the development process more
+cumbersome.</li>
+</ul></li>
+</ol>
+<p>In summary, Spark provides a more powerful and user-friendly
+programming model compared to Hadoop MapReduce. Spark's RDDs and
+higher-level APIs make it easier for developers to write distributed
+data processing applications, leading to faster development cycles and
+more efficient data processing.</p>
+<h1 id="exercise-2.2">Exercise 2.2</h1>
+<blockquote>
+<p>Write and run on AWS EMR a MapReduce program that computes the total
+number of followers and followees for each user in a Twitter dataset.
+The dataset is provided to you in the file <em>twitter_combined.txt</em>
+taken from http://snap.stanford.edu/data/egonets-Twitter.html. Each line
+of this file contains two user ids A and B meaning “<em>User A follows
+User B</em>”. For example, the first line is “214328887 34428380” and it
+means that “User 214328887 follows User 34428380”.</p>
+</blockquote>
+<p>My code is below:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// here is the map</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Map</span> <span class="keyword">extends</span> <span class="title class_">Mapper</span>&lt;LongWritable, Text, Text, IntWritable&gt; {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">map</span><span class="params">(LongWritable key, Text texts, Context context)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, InterruptedException {</span><br><span class="line">        String[] users = texts.toString().split(<span class="string">" "</span>); <span class="comment">// split as user0 user1</span></span><br><span class="line">        <span class="type">IntWritable</span> <span class="variable">followers</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntWritable</span>(-<span class="number">1</span>); <span class="comment">// negative</span></span><br><span class="line">        <span class="type">IntWritable</span> <span class="variable">follows</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntWritable</span>(<span class="number">1</span>); <span class="comment">// positive</span></span><br><span class="line">        context.write(<span class="keyword">new</span> <span class="title class_">Text</span>(users[<span class="number">1</span>]), followers);</span><br><span class="line">        context.write(<span class="keyword">new</span> <span class="title class_">Text</span>(users[<span class="number">0</span>]), follows);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// here is the reduce</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Reduce</span> <span class="keyword">extends</span> <span class="title class_">Reducer</span>&lt;Text, IntWritable, Text, Text&gt; {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">reduce</span><span class="params">(Text texts, Iterable&lt;IntWritable&gt; values, Context context)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, InterruptedException {</span><br><span class="line">        <span class="type">int</span> <span class="variable">follows</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">followers</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (IntWritable text : texts) {</span><br><span class="line">            <span class="keyword">if</span> (text.get() &gt; <span class="number">0</span>) {</span><br><span class="line">                follows += text.get();</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                followers -= text.get();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// output the result for each user</span></span><br><span class="line">        context.write(texts, <span class="keyword">new</span> <span class="title class_">Text</span>(String.format(<span class="string">"Followers %d"</span>, inDegree)));</span><br><span class="line">        context.write(texts, <span class="keyword">new</span> <span class="title class_">Text</span>(String.format(<span class="string">"Follows %d"</span>, outDegree)));</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>Then we create a S3 and upload the files:</p>
+<p><img src="/images/sws3004-lab2/722-13.png" alt="S3"></p>
+<p>Now we can add a step in EMR and view the final output:</p>
+<p><img src="/images/sws3004-lab2/722-15.png" alt="Step"></p>
+<p><img src="/images/sws3004-lab2/722-16.png" alt="Result"></p>
+<p>So User 214328887 has 628 followers, and follows 951 users.</p>
+]]></content>
+      <categories>
+        <category>云开发</category>
+      </categories>
+      <tags>
+        <tag>Cloud</tag>
+        <tag>Lab</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SWS3004-Lab Exercise 1</title>
     <url>/2023/07/15/AWS-Lab1/</url>
     <content><![CDATA[<p>This Lab is based on Amazon Web Services(AWS)，including EC2, Lambda,
 SQS and CloudWatch.</p>
 <span id="more"></span>
-<h1 id="exercise-1">Exercise 1</h1>
+<h1 id="exercise-1.1">Exercise 1.1</h1>
 <h2 id="passwordless-ssh-access-between-two-ec2-instances">Passwordless
 SSH access between two EC2 instances</h2>
 <blockquote>
@@ -79,7 +243,7 @@ forget to restart the service. Type
 password-less SSH access. In figure 9, Instance A and B can
 password-less access to each other using Port 2222.</p>
 <p><img src="/images/sws3004-lab1/714-9.png" alt="Figure 9: Passworld-less SSH in port 2222"></p>
-<h1 id="exercise-2">Exercise 2</h1>
+<h1 id="exercise-1.2">Exercise 1.2</h1>
 <h2 id="start-hello-world">Start: Hello World!</h2>
 <blockquote>
 <p>Start by creating and running a Python AWS hello world using AWS
