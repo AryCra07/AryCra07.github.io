@@ -1,6 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>字节前端一面凉经</title>
+    <url>/2023/08/11/%E5%AD%97%E8%8A%82%E5%89%8D%E7%AB%AF%E4%B8%80%E9%9D%A2%E5%87%89%E7%BB%8F/</url>
+    <content><![CDATA[<p>字节前端一面游记</p>
+<span id="more"></span>
+<ul>
+<li>自我介绍环节，然后开启代码页面</li>
+</ul>
+<h1 id="项目拷打">项目拷打</h1>
+<p>从简历上第一个项目——网页版简易拳皇开始问</p>
+<h1 id="概述">概述</h1>
+<ul>
+<li><strong>如何实现背景框、血条以及人物移动基本功能</strong></li>
+</ul>
+<h2 id="css-部分">css 部分</h2>
+<ul>
+<li><strong>血条如何实现</strong> 早忘了（bushi），后来问 css 会啥我说会
+flex，然后考了垂直居中的几种方式（糊出来两种）</li>
+</ul>
+<p><em>这个时候网断了一次，属于是 gg 的开始</em></p>
+<h2 id="js-部分">js 部分</h2>
+<ul>
+<li><strong>如何实现人物跳跃功能</strong> 凭着记忆写了一个 Player
+类，然后设置 gravity 和 v_vertical 属性糊了一个 jump 函数和 render
+函数，面试官对细节拷打很久最后给过了。</li>
+</ul>
+<p>之后的项目就没继续问了，本来还看了 vue 响应式之类的知识点。</p>
+<h1 id="代码部分">代码部分</h1>
+<h2 id="js-判断数据类型">js 判断数据类型</h2>
+<p>typeof 和 isArray
+一开始没调对，后来面试官看不下去大发慈悲让我调过了（</p>
+<h2 id="js-this-相关">js this 相关</h2>
+<p>首先读代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> {</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name</span>) {</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="title function_">getInfo</span>(<span class="params"></span>) {</span><br><span class="line">    <span class="keyword">return</span> {</span><br><span class="line">        <span class="attr">name</span>: <span class="string">'Tom'</span>,</span><br><span class="line">        <span class="title function_">getName</span>(<span class="params"></span>) {</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> u1 = <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">u1.<span class="title function_">getInfo</span>().<span class="title function_">getName</span>();</span><br></pre></td></tr></table></figure>
+<p>很简单的this问题，问最后输出。然后需要改动 <code>getName</code>
+让其输出 Jarry。改箭头函数就行，然后接着问普通函数和箭头函数区别，答了
+new args this 仨点但是追问细节没说出来。</p>
+<h1 id="反问环节">反问环节</h1>
+<p>最后时间到了，问了</p>
+<ul>
+<li><strong>如何评价（bushi）</strong> 面试官评价基础不够扎实</li>
+<li><strong>业务主要内容和技术栈</strong> 视频开发，React</li>
+</ul>
+<h1 id="如何评价">如何评价</h1>
+<ul>
+<li>和想象中不太一样的是没有基础问答环节，所有东西都是
+<code>show me your code</code>。没考闭包、事件循环、节流/防抖/柯里化这些
+“热点”。</li>
+<li>需要对项目极度熟悉，熟悉到可以凭记忆在代码界面复现的程度（被问的项目作于一年前，吃了大亏）。</li>
+<li>很考验 js
+基础，面试官不认可模棱两可的回答。很可惜只有一天半时间准备面试，临时抱佛脚不太行。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SWS3004-Lecture 1: Concepts and Models</title>
+    <url>/2023/07/28/SWS3004-Lecture-1/</url>
+    <content><![CDATA[<p>L1 is Concepts and Models of Cloud Computing.</p>
+<span id="more"></span>
+<h2 id="outline">Outline</h2>
+<ul>
+<li>NIST Definition</li>
+<li>Cloud Characteristics</li>
+<li>Cloud Service(Delivery) Models</li>
+<li>Conceptual Reference Architecture</li>
+<li>Cloud Deployment Models</li>
+<li>Summary</li>
+</ul>
+<h2 id="key-terms">Key Terms</h2>
+<ol type="1">
+<li><p>Elasticity</p></li>
+<li><p>On-demand self service</p></li>
+<li><p>Pay-per-use (measured service)</p></li>
+<li><p>Multi-tenancy (location independent resource pooling)</p></li>
+<li><p>Cloud service (delivery) models</p></li>
+<li><p>Cloud deployment models</p></li>
+<li><p>Cloud actors</p></li>
+</ol>
+<h1 id="definition">Definition</h1>
+<p><strong>Cloud</strong> means "smooth" to access, control and measure.
+It has <strong>five</strong> essential characteristics,
+<strong>four</strong> deployment models and <strong>three</strong>
+service models.</p>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec1/1.png" alt="NIST Definition" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h1 id="cloud-characteristics">Cloud Characteristics</h1>
+<h2 id="on-demand-self-service-through-a-service-portal">On-demand
+self-service through a service portal</h2>
+<p>With cloud computing, you can provision computing services, like
+server time and network storage, automatically. You won’t need to
+interact with the service provider. Cloud customers can access their
+cloud accounts through a web self-service portal to view their cloud
+services, monitor their usage, and provision and de-provision
+services.</p>
+<h2 id="broad-network-access-ubiquitous-access">Broad network access
+(ubiquitous access)</h2>
+<p>Users can access cloud services anytime and anywhere through a
+terminal device with network connection. Latency and bandwidth both
+count because they affect the quality of service.</p>
+<h2 id="location-independent-resource-pooling-multi-tenancy">Location-independent
+resource pooling (multi-tenancy)</h2>
+<p>Computing resources are gathered together as <strong>pools</strong>,
+like CPU pools, memory pools, etc. With resource pooling, multiple
+customers can share physical resources using a <strong>multi-tenancy
+model</strong>. This model allows customers to share the same
+applications or infrastructure while maintaining privacy and security.
+It's a fantastic characteristic of cloud, which abstracts and subdivides
+physical resources.</p>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec1/3.png" alt="Multi-tenancy" style="width: 80%; height: 80%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="rapid-elasticity-time-to-market-fast-deployment">Rapid
+elasticity – time to market / fast deployment</h2>
+<p>Cloud services can be elastically provisioned and released, sometimes
+automatically, so customers can scale quickly based on demand. With
+rapid and unlimited elasticity of cloud service, you don't need to buy
+hardware but use cloud resources to satisfy your demand.</p>
+<h2 id="measured-service-pay-per-use">Measured service
+(pay-per-use)</h2>
+<p>In cloud systems, a metering capability optimizes resource usage at a
+level of abstraction appropriate to the type of service. For example,
+you can use a measured service for storage, processing, bandwidth, and
+users. Payment is based on actual consumption by the customer via a
+pay-for-what-you-use model. Monitoring, controlling, and reporting
+resource use creates a transparent experience for both consumers and
+providers of the service.</p>
+<h1 id="cloud-servicedelivery-models">Cloud Service(Delivery)
+Models</h1>
+<p>There are three main models: <strong>SaaS</strong>,
+<strong>PaaS</strong> and <strong>IaaS</strong>. As for "steak" service,
+IaaS is like providing a kitchen with some pots, PaaS provides raw beef
+and pepper additionally, and SaaS provides a plate of steak. More
+convenience, but less space to select.</p>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec1/4.png" alt="S/P/IaaS" style="width: 80%; height: 80%; display: block; margin: 0 auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec1/5.png" alt="Comparison of XaaS" style="width: 80%; height: 80%; display: block; margin: 0 auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec1/6.png" alt="Pros and Cons of Service Models" style="width: 80%; height: 80%; display: block; margin: 0 auto;"></p>
+</div>
+<h1 id="conceptual-reference-architecture">Conceptual Reference
+Architecture</h1>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec1/7.png" alt="Cloud Computing Reference Architecture" style="width: 80%; height: 80%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="actor-roles">Actor Roles</h2>
+<ul>
+<li><p><strong>Cloud Consumer</strong> - maintains a business
+relationship with, and uses service from <strong>Cloud
+Providers</strong>.</p></li>
+<li><p><strong>Cloud Provider</strong> – offers a cloud service to cloud
+consumers.</p></li>
+<li><p><strong>Cloud Auditor</strong> - conducts independent assessment
+of cloud services, system operations, performance and security of the
+cloud implementation.</p></li>
+<li><p><strong>Cloud Broker</strong> - manages the use, performance and
+delivery of cloud services, and negotiates relationships between Cloud
+Providers and Cloud Consumers.</p></li>
+<li><p><strong>Cloud Carrier</strong> - provides connectivity and
+transport of cloud services from Cloud Providers to Cloud
+Consumers.</p></li>
+</ul>
+<h1 id="cloud-deployment-models">CLOUD DEPLOYMENT MODELS</h1>
+<ul>
+<li><strong>Private cloud</strong>
+<ul>
+<li>solely for used by an organization</li>
+<li>for enterprises/corporations with large scale IT</li>
+</ul></li>
+<li><strong>Public cloud</strong>
+<ul>
+<li>available to general public, i.e., <strong>shared</strong> by all
+consumers</li>
+<li>open market for on demand computing and IT resources</li>
+<li>concerns: limited SLA, reliability, availability, security,
+trust</li>
+</ul></li>
+<li><strong>Community cloud</strong>
+<ul>
+<li>shared by several organizations and supporting a specific
+community</li>
+</ul></li>
+<li><strong>Hybrid (federated) cloud</strong>
+<ul>
+<li>two or more public and private clouds that interoperate</li>
+<li>extends private cloud(s) to include a shared public cloud</li>
+</ul></li>
+</ul>
+]]></content>
+      <categories>
+        <category>云开发</category>
+      </categories>
+      <tags>
+        <tag>Cloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SWS3004-Lab Exercise 2</title>
+    <url>/2023/07/28/AWS-Lab2/</url>
+    <content><![CDATA[<p>This Lab is about Hadoop and Spark, using AWS EMR and S3.</p>
+<span id="more"></span>
+<h1 id="exercise-2.1">Exercise 2.1</h1>
+<blockquote>
+<p>Run and compare the execution time of WordCount on Wikipidia’s dump
+with both Hadoop MapReduce and Spark. You can use either IaaS or PaaS,
+but make sure you use the same type of setup for both Hadoop and Spark
+(e.g., if you use EMR for Hadoop MapReduce, then use EMR for Spark
+also). You have to use the provided input of size 12 GB. Is there any
+difference in the programming model and ease of programming? Is there
+any difference in performance? Please explain it in maximum 3
+paragraphs. You can include up to 2 performance plots.</p>
+<p>Input dataset address on AWS S3:
+s3://sws3004-2023/input/enwiki-12GB.xml</p>
+<p>You must use this input dataset for both Hadoop MapReduce and
+Spark.</p>
+<p>(Tip: use the entire address s3://sws3004-2023/input/enwiki-12GB.xml
+as parameter to your MapReduce job)</p>
+</blockquote>
+<h3 id="part-1.-hadoop-mapreduce">Part 1. Hadoop Mapreduce</h3>
+<p>First I create a S3 bucket and upload files:</p>
+<p><img src="/images/sws3004-lab2/722-1.png" alt="S3 bucket"></p>
+<p>Then I create an EMR cluster, select the S3 bucket created in the
+previous step as my S3 folder, and select m4.large and default 3
+instances as the instance configuration.</p>
+<p><img src="/images/sws3004-lab2/722-3.png" alt="EMR"></p>
+<p>Now add a step, using <code>WordCount.jar</code> to process the input
+from <code>s3://sws3004-2023/input/enwiki-12GB.xml</code>.</p>
+<p><img src="/images/sws3004-lab2/722-6.png" alt="EMR Step"></p>
+<p>In my S3 bucket, I can check the output when the step finished.</p>
+<p><img src="/images/sws3004-lab2/722-9.png" alt="Check the Output"></p>
+<p><strong>Hadoop MapReduce performance:</strong> The process takes 42
+minutes totally.</p>
+<p><img src="/images/sws3004-lab2/722-8.png" alt="Hadoop MapReduce Performance"></p>
+<h3 id="part-2.-spark">Part 2. Spark</h3>
+<p>I clear the S3 bucket and upload the files of Spark:</p>
+<p><img src="/images/sws3004-lab2/722-17.png" alt="Spark"></p>
+<p>Then create a new EMR for Spark, and add a step.</p>
+<p><img src="/images/sws3004-lab2/722-18.png" alt="EMR Step"></p>
+<p><strong>Spark performance:</strong> The process takes 16 minutes
+totally.</p>
+<p><strong>It seems that Spark is better than Hadoop in performance.
+</strong> The reason is Hadoop uses disk to store data while Spark uses
+memory to store data, which can reduce the I/O time. Also, MapReduce
+requires a lot of time to sort during Shuffle, and sorting seems
+inevitable in MapReduce's Shuffle. When Spark is in Shuffle, sorting is
+only required for some situations, which is faster.</p>
+<h3 id="is-there-any-difference-in-the-programming-model-and-ease-of-programming">Is
+there any difference in the programming model and ease of
+programming?</h3>
+<p><strong>Hadoop MapReduce:</strong> Hadoop MapReduce is a programming
+model designed for distributed data processing on large clusters of
+commodity hardware. The MapReduce programming model has two steps to
+process our data: Map and Reduce.</p>
+<ul>
+<li><strong>Map:</strong> In the Map phase, the input data is divided
+into splits, and each split is processed independently by multiple
+mapper tasks in parallel. The mapper tasks extract key-value pairs from
+the input data and emit intermediate key-value pairs.</li>
+<li><strong>Shuffle and Sort:</strong> The intermediate key-value pairs
+emitted by the mappers are shuffled and sorted based on the keys. This
+step ensures that all values for the same key are grouped together and
+sent to the same reducer task.</li>
+<li><strong>Reduce:</strong> In the Reduce phase, the sorted and
+shuffled intermediate data is processed by reducer tasks. Each reducer
+task processes a subset of the intermediate data, grouped by keys. The
+reducer tasks aggregate the values associated with each key and produce
+the final output.</li>
+</ul>
+<p><strong>Spark:</strong> <strong>Spark is a better distributed data
+processing engine</strong>, which extends the MapReduce model and offers
+more versatility and performance improvements. Spark introduces the
+concept of Resilient Distributed Datasets (RDDs), which are the
+fundamental data abstraction in Spark. RDDs are distributed collections
+of data that can be processed in parallel.</p>
+<p>Spark provides a more general programming model compared to Hadoop
+MapReduce. It supports not only Map and Reduce operations but also
+various other transformations and actions on RDDs, such as filter, join,
+groupByKey, reduceByKey and so on. Additionally, Spark offers
+specialized libraries like Spark SQL for structured data processing,
+Spark Streaming for real-time data streaming, and MLlib for machine
+learning tasks.</p>
+<p><strong>Difference in Programming Model and Ease of
+Programming:</strong></p>
+<p>I found a comparison form in Lecture slides:</p>
+<p><img src="/images/sws3004-lab2/722-7.jpg" alt="Comparision"></p>
+<ol type="1">
+<li><strong>Programming Model:</strong>
+<ul>
+<li>Hadoop MapReduce has a more rigid programming model, where data is
+processed in two distinct phases (Map and Reduce), and users need to
+explicitly handle intermediate data shuffle and sort.</li>
+<li>Spark provides a more flexible and expressive programming model with
+RDDs, allowing users to perform complex operations on distributed data
+through a wide range of transformations and actions.</li>
+</ul></li>
+<li><strong>Ease of Programming:</strong>
+<ul>
+<li>Spark generally offers better ease of programming due to its
+high-level APIs and expressive transformations and actions on RDDs. It
+simplifies the development of distributed data processing applications,
+and its concise syntax often leads to shorter and more readable code
+compared to Hadoop MapReduce.</li>
+<li>Hadoop MapReduce, being more low-level, might require developers to
+write additional code for tasks like intermediate data serialization and
+deserialization, which can make the development process more
+cumbersome.</li>
+</ul></li>
+</ol>
+<p>In summary, Spark provides a more powerful and user-friendly
+programming model compared to Hadoop MapReduce. Spark's RDDs and
+higher-level APIs make it easier for developers to write distributed
+data processing applications, leading to faster development cycles and
+more efficient data processing.</p>
+<h1 id="exercise-2.2">Exercise 2.2</h1>
+<blockquote>
+<p>Write and run on AWS EMR a MapReduce program that computes the total
+number of followers and followees for each user in a Twitter dataset.
+The dataset is provided to you in the file <em>twitter_combined.txt</em>
+taken from http://snap.stanford.edu/data/egonets-Twitter.html. Each line
+of this file contains two user ids A and B meaning “<em>User A follows
+User B</em>”. For example, the first line is “214328887 34428380” and it
+means that “User 214328887 follows User 34428380”.</p>
+</blockquote>
+<p>My code is below:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// here is the map</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Map</span> <span class="keyword">extends</span> <span class="title class_">Mapper</span>&lt;LongWritable, Text, Text, IntWritable&gt; {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">map</span><span class="params">(LongWritable key, Text texts, Context context)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, InterruptedException {</span><br><span class="line">        String[] users = texts.toString().split(<span class="string">" "</span>); <span class="comment">// split as user0 user1</span></span><br><span class="line">        <span class="type">IntWritable</span> <span class="variable">followers</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntWritable</span>(-<span class="number">1</span>); <span class="comment">// negative</span></span><br><span class="line">        <span class="type">IntWritable</span> <span class="variable">follows</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntWritable</span>(<span class="number">1</span>); <span class="comment">// positive</span></span><br><span class="line">        context.write(<span class="keyword">new</span> <span class="title class_">Text</span>(users[<span class="number">1</span>]), followers);</span><br><span class="line">        context.write(<span class="keyword">new</span> <span class="title class_">Text</span>(users[<span class="number">0</span>]), follows);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// here is the reduce</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Reduce</span> <span class="keyword">extends</span> <span class="title class_">Reducer</span>&lt;Text, IntWritable, Text, Text&gt; {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">reduce</span><span class="params">(Text texts, Iterable&lt;IntWritable&gt; values, Context context)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, InterruptedException {</span><br><span class="line">        <span class="type">int</span> <span class="variable">follows</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">followers</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (IntWritable text : texts) {</span><br><span class="line">            <span class="keyword">if</span> (text.get() &gt; <span class="number">0</span>) {</span><br><span class="line">                follows += text.get();</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                followers -= text.get();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// output the result for each user</span></span><br><span class="line">        context.write(texts, <span class="keyword">new</span> <span class="title class_">Text</span>(String.format(<span class="string">"Followers %d"</span>, inDegree)));</span><br><span class="line">        context.write(texts, <span class="keyword">new</span> <span class="title class_">Text</span>(String.format(<span class="string">"Follows %d"</span>, outDegree)));</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>Then we create a S3 and upload the files:</p>
+<p><img src="/images/sws3004-lab2/722-13.png" alt="S3"></p>
+<p>Now we can add a step in EMR and view the final output:</p>
+<p><img src="/images/sws3004-lab2/722-15.png" alt="Step"></p>
+<p><img src="/images/sws3004-lab2/722-16.png" alt="Result"></p>
+<p>So User 214328887 has 628 followers, and follows 951 users.</p>
+]]></content>
+      <categories>
+        <category>云开发</category>
+      </categories>
+      <tags>
+        <tag>Cloud</tag>
+        <tag>Lab</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SWS3004-Lab Exercise 1</title>
     <url>/2023/07/15/AWS-Lab1/</url>
     <content><![CDATA[<p>This Lab is based on Amazon Web Services(AWS)，including EC2, Lambda,
@@ -157,292 +507,98 @@ the logs for my function hello, shown as Figure 18 and Figure 19.</p>
       </tags>
   </entry>
   <entry>
-    <title>SWS3004-Lab Exercise 2</title>
-    <url>/2023/07/28/AWS-Lab2/</url>
-    <content><![CDATA[<p>This Lab is about Hadoop and Spark, using AWS EMR and S3.</p>
+    <title>谈北邮计语工作改进</title>
+    <url>/2023/07/05/%E8%B0%88%E5%8C%97%E9%82%AE%E8%AE%A1%E8%AF%AD%E5%B7%A5%E4%BD%9C%E6%94%B9%E8%BF%9B/</url>
+    <content><![CDATA[<p>在北邮计语融媒体中心平台运营部工作两年，一年当部员一年当副部。临别回想工作得失，不免诸多遗憾，在此一表。</p>
 <span id="more"></span>
-<h1 id="exercise-2.1">Exercise 2.1</h1>
-<blockquote>
-<p>Run and compare the execution time of WordCount on Wikipidia’s dump
-with both Hadoop MapReduce and Spark. You can use either IaaS or PaaS,
-but make sure you use the same type of setup for both Hadoop and Spark
-(e.g., if you use EMR for Hadoop MapReduce, then use EMR for Spark
-also). You have to use the provided input of size 12 GB. Is there any
-difference in the programming model and ease of programming? Is there
-any difference in performance? Please explain it in maximum 3
-paragraphs. You can include up to 2 performance plots.</p>
-<p>Input dataset address on AWS S3:
-s3://sws3004-2023/input/enwiki-12GB.xml</p>
-<p>You must use this input dataset for both Hadoop MapReduce and
-Spark.</p>
-<p>(Tip: use the entire address s3://sws3004-2023/input/enwiki-12GB.xml
-as parameter to your MapReduce job)</p>
-</blockquote>
-<h3 id="part-1.-hadoop-mapreduce">Part 1. Hadoop Mapreduce</h3>
-<p>First I create a S3 bucket and upload files:</p>
-<p><img src="/images/sws3004-lab2/722-1.png" alt="S3 bucket"></p>
-<p>Then I create an EMR cluster, select the S3 bucket created in the
-previous step as my S3 folder, and select m4.large and default 3
-instances as the instance configuration.</p>
-<p><img src="/images/sws3004-lab2/722-3.png" alt="EMR"></p>
-<p>Now add a step, using <code>WordCount.jar</code> to process the input
-from <code>s3://sws3004-2023/input/enwiki-12GB.xml</code>.</p>
-<p><img src="/images/sws3004-lab2/722-6.png" alt="EMR Step"></p>
-<p>In my S3 bucket, I can check the output when the step finished.</p>
-<p><img src="/images/sws3004-lab2/722-9.png" alt="Check the Output"></p>
-<p><strong>Hadoop MapReduce performance:</strong> The process takes 42
-minutes totally.</p>
-<p><img src="/images/sws3004-lab2/722-8.png" alt="Hadoop MapReduce Performance"></p>
-<h3 id="part-2.-spark">Part 2. Spark</h3>
-<p>I clear the S3 bucket and upload the files of Spark:</p>
-<p><img src="/images/sws3004-lab2/722-17.png" alt="Spark"></p>
-<p>Then create a new EMR for Spark, and add a step.</p>
-<p><img src="/images/sws3004-lab2/722-18.png" alt="EMR Step"></p>
-<p><strong>Spark performance:</strong> The process takes 16 minutes
-totally.</p>
-<p><strong>It seems that Spark is better than Hadoop in performance.
-</strong> The reason is Hadoop uses disk to store data while Spark uses
-memory to store data, which can reduce the I/O time. Also, MapReduce
-requires a lot of time to sort during Shuffle, and sorting seems
-inevitable in MapReduce's Shuffle. When Spark is in Shuffle, sorting is
-only required for some situations, which is faster.</p>
-<h3 id="is-there-any-difference-in-the-programming-model-and-ease-of-programming">Is
-there any difference in the programming model and ease of
-programming?</h3>
-<p><strong>Hadoop MapReduce:</strong> Hadoop MapReduce is a programming
-model designed for distributed data processing on large clusters of
-commodity hardware. The MapReduce programming model has two steps to
-process our data: Map and Reduce.</p>
+<h1 id="北邮计语平台运营部是什么">北邮计语平台运营部是什么？</h1>
+<p>北邮计语公众号本质上是北邮计院的官方媒体，由北邮计语融媒体中心平台运营部负责推送的制作、发布与日常运营。</p>
 <ul>
-<li><strong>Map:</strong> In the Map phase, the input data is divided
-into splits, and each split is processed independently by multiple
-mapper tasks in parallel. The mapper tasks extract key-value pairs from
-the input data and emit intermediate key-value pairs.</li>
-<li><strong>Shuffle and Sort:</strong> The intermediate key-value pairs
-emitted by the mappers are shuffled and sorted based on the keys. This
-step ensures that all values for the same key are grouped together and
-sent to the same reducer task.</li>
-<li><strong>Reduce:</strong> In the Reduce phase, the sorted and
-shuffled intermediate data is processed by reducer tasks. Each reducer
-task processes a subset of the intermediate data, grouped by keys. The
-reducer tasks aggregate the values associated with each key and produce
-the final output.</li>
+<li>官方媒体这一属性决定了两点：
+<ul>
+<li>平台运营部的工作流程中，审核或者“领导”的话语权最大。</li>
+<li>平台推送的核心内容是党政主题，占据推送内容的一半左右。</li>
+</ul></li>
+<li>平台运营部直接管理公众号平台，因而需要与其他各部门的宣传工作对接。</li>
 </ul>
-<p><strong>Spark:</strong> <strong>Spark is a better distributed data
-processing engine</strong>, which extends the MapReduce model and offers
-more versatility and performance improvements. Spark introduces the
-concept of Resilient Distributed Datasets (RDDs), which are the
-fundamental data abstraction in Spark. RDDs are distributed collections
-of data that can be processed in parallel.</p>
-<p>Spark provides a more general programming model compared to Hadoop
-MapReduce. It supports not only Map and Reduce operations but also
-various other transformations and actions on RDDs, such as filter, join,
-groupByKey, reduceByKey and so on. Additionally, Spark offers
-specialized libraries like Spark SQL for structured data processing,
-Spark Streaming for real-time data streaming, and MLlib for machine
-learning tasks.</p>
-<p><strong>Difference in Programming Model and Ease of
-Programming:</strong></p>
-<p>I found a comparison form in Lecture slides:</p>
-<p><img src="/images/sws3004-lab2/722-7.jpg" alt="Comparision"></p>
-<ol type="1">
-<li><strong>Programming Model:</strong>
-<ul>
-<li>Hadoop MapReduce has a more rigid programming model, where data is
-processed in two distinct phases (Map and Reduce), and users need to
-explicitly handle intermediate data shuffle and sort.</li>
-<li>Spark provides a more flexible and expressive programming model with
-RDDs, allowing users to perform complex operations on distributed data
-through a wide range of transformations and actions.</li>
-</ul></li>
-<li><strong>Ease of Programming:</strong>
-<ul>
-<li>Spark generally offers better ease of programming due to its
-high-level APIs and expressive transformations and actions on RDDs. It
-simplifies the development of distributed data processing applications,
-and its concise syntax often leads to shorter and more readable code
-compared to Hadoop MapReduce.</li>
-<li>Hadoop MapReduce, being more low-level, might require developers to
-write additional code for tasks like intermediate data serialization and
-deserialization, which can make the development process more
-cumbersome.</li>
-</ul></li>
-</ol>
-<p>In summary, Spark provides a more powerful and user-friendly
-programming model compared to Hadoop MapReduce. Spark's RDDs and
-higher-level APIs make it easier for developers to write distributed
-data processing applications, leading to faster development cycles and
-more efficient data processing.</p>
-<h1 id="exercise-2.2">Exercise 2.2</h1>
+<h1 id="谈一些问题">谈一些问题</h1>
+<h2 id="部门的纵向工作流程">部门的纵向工作流程</h2>
 <blockquote>
-<p>Write and run on AWS EMR a MapReduce program that computes the total
-number of followers and followees for each user in a Twitter dataset.
-The dataset is provided to you in the file <em>twitter_combined.txt</em>
-taken from http://snap.stanford.edu/data/egonets-Twitter.html. Each line
-of this file contains two user ids A and B meaning “<em>User A follows
-User B</em>”. For example, the first line is “214328887 34428380” and it
-means that “User 214328887 follows User 34428380”.</p>
+<p>上级领导 &gt; 指导老师 &gt; 部长团 &gt; 组长 &gt; 部员</p>
 </blockquote>
-<p>My code is below:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// here is the map</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Map</span> <span class="keyword">extends</span> <span class="title class_">Mapper</span>&lt;LongWritable, Text, Text, IntWritable&gt; {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">map</span><span class="params">(LongWritable key, Text texts, Context context)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, InterruptedException {</span><br><span class="line">        String[] users = texts.toString().split(<span class="string">" "</span>); <span class="comment">// split as user0 user1</span></span><br><span class="line">        <span class="type">IntWritable</span> <span class="variable">followers</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntWritable</span>(-<span class="number">1</span>); <span class="comment">// negative</span></span><br><span class="line">        <span class="type">IntWritable</span> <span class="variable">follows</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntWritable</span>(<span class="number">1</span>); <span class="comment">// positive</span></span><br><span class="line">        context.write(<span class="keyword">new</span> <span class="title class_">Text</span>(users[<span class="number">1</span>]), followers);</span><br><span class="line">        context.write(<span class="keyword">new</span> <span class="title class_">Text</span>(users[<span class="number">0</span>]), follows);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// here is the reduce</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Reduce</span> <span class="keyword">extends</span> <span class="title class_">Reducer</span>&lt;Text, IntWritable, Text, Text&gt; {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">reduce</span><span class="params">(Text texts, Iterable&lt;IntWritable&gt; values, Context context)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, InterruptedException {</span><br><span class="line">        <span class="type">int</span> <span class="variable">follows</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">followers</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (IntWritable text : texts) {</span><br><span class="line">            <span class="keyword">if</span> (text.get() &gt; <span class="number">0</span>) {</span><br><span class="line">                follows += text.get();</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                followers -= text.get();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// output the result for each user</span></span><br><span class="line">        context.write(texts, <span class="keyword">new</span> <span class="title class_">Text</span>(String.format(<span class="string">"Followers %d"</span>, inDegree)));</span><br><span class="line">        context.write(texts, <span class="keyword">new</span> <span class="title class_">Text</span>(String.format(<span class="string">"Follows %d"</span>, outDegree)));</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<p>Then we create a S3 and upload the files:</p>
-<p><img src="/images/sws3004-lab2/722-13.png" alt="S3"></p>
-<p>Now we can add a step in EMR and view the final output:</p>
-<p><img src="/images/sws3004-lab2/722-15.png" alt="Step"></p>
-<p><img src="/images/sws3004-lab2/722-16.png" alt="Result"></p>
-<p>So User 214328887 has 628 followers, and follows 951 users.</p>
+<ul>
+<li><p><strong>向上负责</strong>
+权力只对权力的来源负责。在这样一级级下压的金字塔建筑中，由上层向下层下达指令，从顶层设计逐渐到底层实现，从抽象逐渐到具体。上层给予下层一些必要的权力，当然也拥有对工作的审核与否定权。</p></li>
+<li><p><strong>流程漫长</strong>
+让我们从《力量》栏目的制作流程谈起。首先领导决定要制作一个党政类品牌节目，然后
+指导老师会和部长团开始设计并做出一版demo，最终敲定这个栏目的框架与模板，并让下面的小组进行每期的制作。每期制作好的推送都会由部员交给组长再交给部长团，然后交给老师审核；老师将审核意见下传给部长团，部长团自己进行修改或者再下发给部员。</p>
+<p>这种审核流程会让工作效率极慢——一项工作往往由上到下逐渐具体化，交回审核者时会被细致地审核，并一级一级传递给下层改正。这样的审核常常持续1~2天，工作内容会被反复地进行细节修改乃至推倒重来。沟通环节的长度与频率极大延长了工作周期，当然也给负责修改的下层带来极大的折磨。</p></li>
+</ul>
+<h2 id="横向对接与内部工作">横向对接与内部工作</h2>
+<ul>
+<li>部门横向对接上，其他部门常常无视书面要求，压着截止时间进行申请对接。我们部门有着明确的接稿时间与格式标准，但需要常常“破例”。</li>
+<li>我部内部工作架构是部长-&gt;副部长-&gt;组长-&gt;部员，副部长也兼任着组长一职。由部长负责分配任务给组长，组长下发给组员。部长与副部长同时负责送审、运营及各项其他事务。这样出现的问题是，某种意义上副部长只是一个拥有额外任务的“组长plus”，不具有部门范围的调度权力。
+<ul>
+<li>当部长这一环停滞时，其他人没有分配调度工作的权力，进而导致工作停摆。停摆到逾期时又需要迅速补救，导致工作压力增大的同时工作质量下降。</li>
+</ul></li>
+<li>部门没有工作计划表，很多工作会被忽视或者遗忘，需要在临近截止时赶工。比如最基本的二十四节气与节日推送，完全可以写在工作表上提前去做，但我们并没有这样一张工作表。</li>
+</ul>
+<h1 id="问题所在制度">问题所在——制度</h1>
+<p>诚然，很多问题都可以简单归咎于人的因素，归咎于人在能力与性格上的局限性。但根本所在我想还是在制度。认真制定并严格执行的规章制度是一个团队战斗力和凝聚力的关键所在，好的制度可以合理规划工作流程，界定各人权力与职责，进而增加团队的工作效率与内在凝聚力。</p>
+<ul>
+<li><p><strong>从推送制作着手优化</strong>
+对部员定期组织系统的培训交流会，将工作规范以书面形式着重强调，避免低级错误的产生可以大大减轻审核压力。</p></li>
+<li><p><strong>部长放权至部长团</strong>
+分配调度的权力由部长扩大至部长团，破除按单个职能划定分工的方式（xx负责排版、xx负责文案这种划定方式不符合工作实际，也不利于工作效率），保证工作流程不会因为某个人的缺失而停滞。</p></li>
+<li><p><strong>决策层下调</strong>
+决策有着天然向上集中的属性，所以制度设计中应该着力避免一切决策都往上堆的问题，更何况决策的执行往往由下层实施，这样的沟通成本很大。</p>
+<ul>
+<li>最终拍板决策的权力在审核老师，部长团自己对推送的修改意见往往会与之相左甚至大相径庭，部长团没有动力在老师之前进行预先审核。</li>
+<li>工作量过大，一项推送前前后后涉及到的步骤与细节相对繁复，更何况推送频次少则每周数个多则每天数个，决策向上集中一个是效率很依赖审核老师的状态，一个是底下部长团乃至部员有时苦不堪言。</li>
+</ul>
+<p>因此我认为将审核的权利与责任下放给全体部长团，部长团直接与制作小组沟通，审核老师做给予充分信任与最后的微调即可。</p></li>
+</ul>
+<h1 id="farewell">Farewell</h1>
+<p>总归到了告别的时候，我曾经以为自己会在北邮计语一直工作到毕业，但最后还是选择了离开。一段辛苦的旅程结束总会给我一种解脱感，但这次并没有太大触动。可能是前面还有很多路要走，或是我曾经真的爱得深沉。</p>
+<p>回想过去两年，常常因为部门工作案牍劳形——在假期、期末甚至除夕夜，在酒店、餐厅乃至火车上，我都有打开电脑处理工作的经历。一路走来，我自认为圆满完成了几乎所有负责的任务，只是可惜亲手设计的两个栏目一个被一拖再拖，一个已经与我没有关系（也许总有一天会与读者见面）。</p>
+<p>有太多事情的成败并非自己能决定，它们日后的进程又只有天知道。所以尽力就好，享受接下来的旅程。</p>
 ]]></content>
       <categories>
-        <category>云开发</category>
+        <category>随笔</category>
       </categories>
       <tags>
-        <tag>Cloud</tag>
-        <tag>Lab</tag>
+        <tag>杂谈</tag>
+        <tag>思考</tag>
       </tags>
   </entry>
   <entry>
-    <title>SWS3004-Lecture 1: Concepts and Models</title>
-    <url>/2023/07/28/SWS3004-Lecture-1/</url>
-    <content><![CDATA[<p>L1 is Concepts and Models of Cloud Computing.</p>
+    <title>虎符前端工程实践2</title>
+    <url>/2023/06/09/%E8%99%8E%E7%AC%A6%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B52/</url>
+    <content><![CDATA[<ul>
+<li>如何限制段落最大显示字数</li>
+</ul>
 <span id="more"></span>
-<h2 id="outline">Outline</h2>
-<ul>
-<li>NIST Definition</li>
-<li>Cloud Characteristics</li>
-<li>Cloud Service(Delivery) Models</li>
-<li>Conceptual Reference Architecture</li>
-<li>Cloud Deployment Models</li>
-<li>Summary</li>
-</ul>
-<h2 id="key-terms">Key Terms</h2>
-<ol type="1">
-<li><p>Elasticity</p></li>
-<li><p>On-demand self service</p></li>
-<li><p>Pay-per-use (measured service)</p></li>
-<li><p>Multi-tenancy (location independent resource pooling)</p></li>
-<li><p>Cloud service (delivery) models</p></li>
-<li><p>Cloud deployment models</p></li>
-<li><p>Cloud actors</p></li>
-</ol>
-<h1 id="definition">Definition</h1>
-<p><strong>Cloud</strong> means "smooth" to access, control and measure.
-It has <strong>five</strong> essential characteristics,
-<strong>four</strong> deployment models and <strong>three</strong>
-service models.</p>
-<div style="text-align: center;">
-<p><img src="/images/sws3004-lec1/1.png" alt="NIST Definition" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
-</div>
-<h1 id="cloud-characteristics">Cloud Characteristics</h1>
-<h2 id="on-demand-self-service-through-a-service-portal">On-demand
-self-service through a service portal</h2>
-<p>With cloud computing, you can provision computing services, like
-server time and network storage, automatically. You won’t need to
-interact with the service provider. Cloud customers can access their
-cloud accounts through a web self-service portal to view their cloud
-services, monitor their usage, and provision and de-provision
-services.</p>
-<h2 id="broad-network-access-ubiquitous-access">Broad network access
-(ubiquitous access)</h2>
-<p>Users can access cloud services anytime and anywhere through a
-terminal device with network connection. Latency and bandwidth both
-count because they affect the quality of service.</p>
-<h2 id="location-independent-resource-pooling-multi-tenancy">Location-independent
-resource pooling (multi-tenancy)</h2>
-<p>Computing resources are gathered together as <strong>pools</strong>,
-like CPU pools, memory pools, etc. With resource pooling, multiple
-customers can share physical resources using a <strong>multi-tenancy
-model</strong>. This model allows customers to share the same
-applications or infrastructure while maintaining privacy and security.
-It's a fantastic characteristic of cloud, which abstracts and subdivides
-physical resources.</p>
-<div style="text-align: center;">
-<p><img src="/images/sws3004-lec1/3.png" alt="Multi-tenancy" style="width: 80%; height: 80%; display: block; margin: 0 auto;"></p>
-</div>
-<h2 id="rapid-elasticity-time-to-market-fast-deployment">Rapid
-elasticity – time to market / fast deployment</h2>
-<p>Cloud services can be elastically provisioned and released, sometimes
-automatically, so customers can scale quickly based on demand. With
-rapid and unlimited elasticity of cloud service, you don't need to buy
-hardware but use cloud resources to satisfy your demand.</p>
-<h2 id="measured-service-pay-per-use">Measured service
-(pay-per-use)</h2>
-<p>In cloud systems, a metering capability optimizes resource usage at a
-level of abstraction appropriate to the type of service. For example,
-you can use a measured service for storage, processing, bandwidth, and
-users. Payment is based on actual consumption by the customer via a
-pay-for-what-you-use model. Monitoring, controlling, and reporting
-resource use creates a transparent experience for both consumers and
-providers of the service.</p>
-<h1 id="cloud-servicedelivery-models">Cloud Service(Delivery)
-Models</h1>
-<p>There are three main models: <strong>SaaS</strong>,
-<strong>PaaS</strong> and <strong>IaaS</strong>. As for "steak" service,
-IaaS is like providing a kitchen with some pots, PaaS provides raw beef
-and pepper additionally, and SaaS provides a plate of steak. More
-convenience, but less space to select.</p>
-<div style="text-align: center;">
-<p><img src="/images/sws3004-lec1/4.png" alt="S/P/IaaS" style="width: 80%; height: 80%; display: block; margin: 0 auto;"></p>
-</div>
-<div style="text-align: center;">
-<p><img src="/images/sws3004-lec1/5.png" alt="Comparison of XaaS" style="width: 80%; height: 80%; display: block; margin: 0 auto;"></p>
-</div>
-<div style="text-align: center;">
-<p><img src="/images/sws3004-lec1/6.png" alt="Pros and Cons of Service Models" style="width: 80%; height: 80%; display: block; margin: 0 auto;"></p>
-</div>
-<h1 id="conceptual-reference-architecture">Conceptual Reference
-Architecture</h1>
-<div style="text-align: center;">
-<p><img src="/images/sws3004-lec1/7.png" alt="Cloud Computing Reference Architecture" style="width: 80%; height: 80%; display: block; margin: 0 auto;"></p>
-</div>
-<h2 id="actor-roles">Actor Roles</h2>
-<ul>
-<li><p><strong>Cloud Consumer</strong> - maintains a business
-relationship with, and uses service from <strong>Cloud
-Providers</strong>.</p></li>
-<li><p><strong>Cloud Provider</strong> – offers a cloud service to cloud
-consumers.</p></li>
-<li><p><strong>Cloud Auditor</strong> - conducts independent assessment
-of cloud services, system operations, performance and security of the
-cloud implementation.</p></li>
-<li><p><strong>Cloud Broker</strong> - manages the use, performance and
-delivery of cloud services, and negotiates relationships between Cloud
-Providers and Cloud Consumers.</p></li>
-<li><p><strong>Cloud Carrier</strong> - provides connectivity and
-transport of cloud services from Cloud Providers to Cloud
-Consumers.</p></li>
-</ul>
-<h1 id="cloud-deployment-models">CLOUD DEPLOYMENT MODELS</h1>
-<ul>
-<li><strong>Private cloud</strong>
-<ul>
-<li>solely for used by an organization</li>
-<li>for enterprises/corporations with large scale IT</li>
-</ul></li>
-<li><strong>Public cloud</strong>
-<ul>
-<li>available to general public, i.e., <strong>shared</strong> by all
-consumers</li>
-<li>open market for on demand computing and IT resources</li>
-<li>concerns: limited SLA, reliability, availability, security,
-trust</li>
-</ul></li>
-<li><strong>Community cloud</strong>
-<ul>
-<li>shared by several organizations and supporting a specific
-community</li>
-</ul></li>
-<li><strong>Hybrid (federated) cloud</strong>
-<ul>
-<li>two or more public and private clouds that interoperate</li>
-<li>extends private cloud(s) to include a shared public cloud</li>
-</ul></li>
-</ul>
+<h1 id="vue-实现限制段落字数">Vue 实现限制段落字数</h1>
+<h2 id="原版代码及显示">原版代码及显示：</h2>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item-warn-board"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row_spacing"</span> <span class="attr">v-if</span>=<span class="string">"AlertList.length &gt; 0"</span> <span class="attr">v-for</span>=<span class="string">"i in 5"</span> <span class="attr">style</span>=<span class="string">"text-align: left;margin-bottom: 8px"</span>&gt;</span></span><br><span class="line">    {{ AlertList[i].annotations.summary }}</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/2023-6-9-1.png"></p>
+<p>我们需要将每段告警限制在一行之内，并将多余字符以 <code>...</code>
+替换</p>
+<h2 id="vue-实现">Vue 实现</h2>
+<p>在 <code>methods</code> 中添加如下方法：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">truncateText</span>(<span class="params">text, maxLength</span>) {</span><br><span class="line">  <span class="keyword">if</span> (text.<span class="property">length</span> &gt; maxLength) {</span><br><span class="line">    <span class="keyword">return</span> text.<span class="title function_">slice</span>(<span class="number">0</span>, maxLength) + <span class="string">'...'</span></span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">return</span> text</span><br><span class="line">},</span><br></pre></td></tr></table></figure>
+<p>再在 <code>template</code> 中将页面改成：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item-warn-board"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row_spacing"</span> <span class="attr">v-if</span>=<span class="string">"AlertList.length &gt; 0"</span> <span class="attr">v-for</span>=<span class="string">"i in 5"</span> <span class="attr">style</span>=<span class="string">"text-align: left;margin-bottom: 10px"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"bullet"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    {{ truncateText(AlertList[i].annotations.summary, 47) }}</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这样，我们便成功地实现限制文本长度的功能：</p>
+<p><img src="/images/2023-6-9-2.png"></p>
 ]]></content>
       <categories>
-        <category>云开发</category>
+        <category>前端</category>
       </categories>
       <tags>
-        <tag>Cloud</tag>
+        <tag>前端</tag>
+        <tag>虎符</tag>
+        <tag>VUE</tag>
       </tags>
   </entry>
   <entry>
@@ -526,101 +682,6 @@ axisPointer。
         <tag>虎符</tag>
         <tag>VUE</tag>
         <tag>echarts</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>虎符前端工程实践2</title>
-    <url>/2023/06/09/%E8%99%8E%E7%AC%A6%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B52/</url>
-    <content><![CDATA[<ul>
-<li>如何限制段落最大显示字数</li>
-</ul>
-<span id="more"></span>
-<h1 id="vue-实现限制段落字数">Vue 实现限制段落字数</h1>
-<h2 id="原版代码及显示">原版代码及显示：</h2>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item-warn-board"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row_spacing"</span> <span class="attr">v-if</span>=<span class="string">"AlertList.length &gt; 0"</span> <span class="attr">v-for</span>=<span class="string">"i in 5"</span> <span class="attr">style</span>=<span class="string">"text-align: left;margin-bottom: 8px"</span>&gt;</span></span><br><span class="line">    {{ AlertList[i].annotations.summary }}</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="/images/2023-6-9-1.png"></p>
-<p>我们需要将每段告警限制在一行之内，并将多余字符以 <code>...</code>
-替换</p>
-<h2 id="vue-实现">Vue 实现</h2>
-<p>在 <code>methods</code> 中添加如下方法：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">truncateText</span>(<span class="params">text, maxLength</span>) {</span><br><span class="line">  <span class="keyword">if</span> (text.<span class="property">length</span> &gt; maxLength) {</span><br><span class="line">    <span class="keyword">return</span> text.<span class="title function_">slice</span>(<span class="number">0</span>, maxLength) + <span class="string">'...'</span></span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">return</span> text</span><br><span class="line">},</span><br></pre></td></tr></table></figure>
-<p>再在 <code>template</code> 中将页面改成：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item-warn-board"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row_spacing"</span> <span class="attr">v-if</span>=<span class="string">"AlertList.length &gt; 0"</span> <span class="attr">v-for</span>=<span class="string">"i in 5"</span> <span class="attr">style</span>=<span class="string">"text-align: left;margin-bottom: 10px"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"bullet"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    {{ truncateText(AlertList[i].annotations.summary, 47) }}</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这样，我们便成功地实现限制文本长度的功能：</p>
-<p><img src="/images/2023-6-9-2.png"></p>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>虎符</tag>
-        <tag>VUE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>谈北邮计语工作改进</title>
-    <url>/2023/07/05/%E8%B0%88%E5%8C%97%E9%82%AE%E8%AE%A1%E8%AF%AD%E5%B7%A5%E4%BD%9C%E6%94%B9%E8%BF%9B/</url>
-    <content><![CDATA[<p>在北邮计语融媒体中心平台运营部工作两年，一年当部员一年当副部。临别回想工作得失，不免诸多遗憾，在此一表。</p>
-<span id="more"></span>
-<h1 id="北邮计语平台运营部是什么">北邮计语平台运营部是什么？</h1>
-<p>北邮计语公众号本质上是北邮计院的官方媒体，由北邮计语融媒体中心平台运营部负责推送的制作、发布与日常运营。</p>
-<ul>
-<li>官方媒体这一属性决定了两点：
-<ul>
-<li>平台运营部的工作流程中，审核或者“领导”的话语权最大。</li>
-<li>平台推送的核心内容是党政主题，占据推送内容的一半左右。</li>
-</ul></li>
-<li>平台运营部直接管理公众号平台，因而需要与其他各部门的宣传工作对接。</li>
-</ul>
-<h1 id="谈一些问题">谈一些问题</h1>
-<h2 id="部门的纵向工作流程">部门的纵向工作流程</h2>
-<blockquote>
-<p>上级领导 &gt; 指导老师 &gt; 部长团 &gt; 组长 &gt; 部员</p>
-</blockquote>
-<ul>
-<li><p><strong>向上负责</strong>
-权力只对权力的来源负责。在这样一级级下压的金字塔建筑中，由上层向下层下达指令，从顶层设计逐渐到底层实现，从抽象逐渐到具体。上层给予下层一些必要的权力，当然也拥有对工作的审核与否定权。</p></li>
-<li><p><strong>流程漫长</strong>
-让我们从《力量》栏目的制作流程谈起。首先领导决定要制作一个党政类品牌节目，然后
-指导老师会和部长团开始设计并做出一版demo，最终敲定这个栏目的框架与模板，并让下面的小组进行每期的制作。每期制作好的推送都会由部员交给组长再交给部长团，然后交给老师审核；老师将审核意见下传给部长团，部长团自己进行修改或者再下发给部员。</p>
-<p>这种审核流程会让工作效率极慢——一项工作往往由上到下逐渐具体化，交回审核者时会被细致地审核，并一级一级传递给下层改正。这样的审核常常持续1~2天，工作内容会被反复地进行细节修改乃至推倒重来。沟通环节的长度与频率极大延长了工作周期，当然也给负责修改的下层带来极大的折磨。</p></li>
-</ul>
-<h2 id="横向对接与内部工作">横向对接与内部工作</h2>
-<ul>
-<li>部门横向对接上，其他部门常常无视书面要求，压着截止时间进行申请对接。我们部门有着明确的接稿时间与格式标准，但需要常常“破例”。</li>
-<li>我部内部工作架构是部长-&gt;副部长-&gt;组长-&gt;部员，副部长也兼任着组长一职。由部长负责分配任务给组长，组长下发给组员。部长与副部长同时负责送审、运营及各项其他事务。这样出现的问题是，某种意义上副部长只是一个拥有额外任务的“组长plus”，不具有部门范围的调度权力。
-<ul>
-<li>当部长这一环停滞时，其他人没有分配调度工作的权力，进而导致工作停摆。停摆到逾期时又需要迅速补救，导致工作压力增大的同时工作质量下降。</li>
-</ul></li>
-<li>部门没有工作计划表，很多工作会被忽视或者遗忘，需要在临近截止时赶工。比如最基本的二十四节气与节日推送，完全可以写在工作表上提前去做，但我们并没有这样一张工作表。</li>
-</ul>
-<h1 id="问题所在制度">问题所在——制度</h1>
-<p>诚然，很多问题都可以简单归咎于人的因素，归咎于人在能力与性格上的局限性。但根本所在我想还是在制度。认真制定并严格执行的规章制度是一个团队战斗力和凝聚力的关键所在，好的制度可以合理规划工作流程，界定各人权力与职责，进而增加团队的工作效率与内在凝聚力。</p>
-<ul>
-<li><p><strong>从推送制作着手优化</strong>
-对部员定期组织系统的培训交流会，将工作规范以书面形式着重强调，避免低级错误的产生可以大大减轻审核压力。</p></li>
-<li><p><strong>部长放权至部长团</strong>
-分配调度的权力由部长扩大至部长团，破除按单个职能划定分工的方式（xx负责排版、xx负责文案这种划定方式不符合工作实际，也不利于工作效率），保证工作流程不会因为某个人的缺失而停滞。</p></li>
-<li><p><strong>决策层下调</strong>
-决策有着天然向上集中的属性，所以制度设计中应该着力避免一切决策都往上堆的问题，更何况决策的执行往往由下层实施，这样的沟通成本很大。</p>
-<ul>
-<li>最终拍板决策的权力在审核老师，部长团自己对推送的修改意见往往会与之相左甚至大相径庭，部长团没有动力在老师之前进行预先审核。</li>
-<li>工作量过大，一项推送前前后后涉及到的步骤与细节相对繁复，更何况推送频次少则每周数个多则每天数个，决策向上集中一个是效率很依赖审核老师的状态，一个是底下部长团乃至部员有时苦不堪言。</li>
-</ul>
-<p>因此我认为将审核的权利与责任下放给全体部长团，部长团直接与制作小组沟通，审核老师做给予充分信任与最后的微调即可。</p></li>
-</ul>
-<h1 id="farewell">Farewell</h1>
-<p>总归到了告别的时候，我曾经以为自己会在北邮计语一直工作到毕业，但最后还是选择了离开。一段辛苦的旅程结束总会给我一种解脱感，但这次并没有太大触动。可能是前面还有很多路要走，或是我曾经真的爱得深沉。</p>
-<p>回想过去两年，常常因为部门工作案牍劳形——在假期、期末甚至除夕夜，在酒店、餐厅乃至火车上，我都有打开电脑处理工作的经历。一路走来，我自认为圆满完成了几乎所有负责的任务，只是可惜亲手设计的两个栏目一个被一拖再拖，一个已经与我没有关系（也许总有一天会与读者见面）。</p>
-<p>有太多事情的成败并非自己能决定，它们日后的进程又只有天知道。所以尽力就好，享受接下来的旅程。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
-        <tag>思考</tag>
       </tags>
   </entry>
 </search>
