@@ -62,9 +62,534 @@ new args this 仨点但是追问细节没说出来。</p>
       </tags>
   </entry>
   <entry>
+    <title>SWS3004-Lecture 4: Cloud Software Development and Deployment</title>
+    <url>/2023/08/10/SWS3004-Lecture-4/</url>
+    <content><![CDATA[<p>L4 is about Cloud Software Development and Deployment.</p>
+<span id="more"></span>
+<h2 id="outline">Outline</h2>
+<ul>
+<li><p>Cloud Software Development</p></li>
+<li><p>Learning Objectives</p></li>
+<li><p>SaaS is Different from Traditional Software</p></li>
+<li><p>Different Perspectives of SaaS Development</p>
+<ul>
+<li><p>SaaS with Self-managed Infrastructure and Self-managed
+Platform</p></li>
+<li><p>SaaS with Self-managed Platform</p></li>
+<li><p>SaaS with Self-managed Infrastructure</p></li>
+<li><p>SaaS with Cloud-enabled IaaS and SaaS</p></li>
+</ul></li>
+<li><p>Summary</p></li>
+</ul>
+<h1 id="cloud-software-development">Cloud Software Development</h1>
+<ul>
+<li><p>Power of cloud computing – exploits higher service-level
+abstraction, PaaS and SaaS, to reduce the time and cost of software
+development</p></li>
+<li><p><strong>SaaS</strong> changes the way software is
+<em>delivered</em></p>
+<ul>
+<li>usage-based billing, high scalability, ease of access, automated
+updates</li>
+</ul></li>
+<li><p><strong>PaaS</strong> changes the way the (SaaS) software is
+<em>developed</em></p>
+<ul>
+<li>automates the process of deployment, testing and scaling to reduce
+manual work and cost of application development</li>
+</ul></li>
+</ul>
+<h2 id="learning-objectives">Learning Objectives</h2>
+<ol type="1">
+<li><p>Understand how SaaS applications are different from traditional
+software/application</p></li>
+<li><p>Understand the different perspectives of SaaS software
+development</p></li>
+</ol>
+<h1 id="saas-is-different-from-traditional-software">SaaS is Different
+from Traditional Software</h1>
+<ul>
+<li><p><strong>Pay-per-use</strong> - provides web access to commercial
+software on pay-as you-use vs traditional pay the full license
+fee</p></li>
+<li><p><strong>Zero infrastructure</strong> – customers need not install
+the software (SaaS developed, deployed and managed by service provider)
+vs ASP (application service provider) owns and manages dedicated
+infrastructure for each customers</p></li>
+<li><p><strong>Reduced business cost</strong> – 1-many - same SaaS
+application shared by multiple customers (multi-tenants) vs traditional
+1-1 end-users and software relationship</p></li>
+<li><p><strong>Automated updates</strong> – Updates performed by service
+providers (SaaS) not by users (traditional)</p></li>
+</ul>
+<h2 id="suitability-of-saas">Suitability of SaaS</h2>
+<h3 id="not-suitable">Not suitable</h3>
+<ul>
+<li><p>Real-time processing where fast processing of data is
+needed</p></li>
+<li><p>Organization’s data is more confidential and data localization is
+needed</p></li>
+<li><p>When on-premise applications fulfil organization’s needs</p></li>
+</ul>
+<h3 id="suitable">Suitable</h3>
+<ul>
+<li><p>Consumers require on-demand software rather than full
+term/licensing-based software</p></li>
+<li><p>Start-up company that cannot invest in buying licensed
+software</p></li>
+<li><p>Applications with unpredictable and dynamic load</p></li>
+</ul>
+<h1 id="different-perspectives-of-saas-development">Different
+Perspectives Of SaaS Development</h1>
+<ul>
+<li><p>2 key challenges</p>
+<ul>
+<li><p>choosing correct multitenancy level(s) - multitenancy can be
+achieved at different levels such as infrastructure, platform and
+application</p></li>
+<li><p>governance and security over user data</p></li>
+</ul></li>
+<li><p>four perspectives</p>
+<ul>
+<li><p>SaaS with Self-managed Infrastructure and Self-managed
+Platform</p></li>
+<li><p>SaaS with Self-managed Platform</p></li>
+<li><p>SaaS with Self-managed Infrastructure</p></li>
+<li><p>SaaS with Cloud-enabled IaaS and PaaS</p></li>
+</ul></li>
+</ul>
+<h2 id="saas-with-self-managed-infrastructure-and-self-managed-platform">SaaS
+with Self-managed Infrastructure and Self-managed Platform</h2>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec4/1.png" alt="SaaS with Self-managed Infrastructure and Self-managed Platform" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="saas-with-self-managed-platform">SaaS with Self-managed
+Platform</h2>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec4/2.png" alt="SaaS with Self-managed Platform" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="saas-with-self-managed-infrastructure">SaaS with Self-managed
+Infrastructure</h2>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec4/3.png" alt="SaaS with Self-managed Infrastructure" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="saas-with-cloud-enabled-iaas-and-paas">SaaS with Cloud-enabled
+IaaS and PaaS</h2>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec4/4.png" alt="SaaS with Cloud-enabled IaaS and PaaS" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h1 id="summary">Summary</h1>
+<ul>
+<li><p>cloud software development</p>
+<ul>
+<li><p>SaaS changes the way software is delivered</p></li>
+<li><p>SaaS is different from traditional software</p></li>
+<li><p>SaaS development: from self-managed to cloud enabled IaaS and/or
+PaaS</p></li>
+</ul></li>
+<li><p>cloud-enabled platform services (with advanced capabilities
+around artificial intelligence (AI), data analytics, blockchain, IoT, …)
++ server-less computing changes the development, deployment and cost of
+more complex software applications</p></li>
+</ul>
+]]></content>
+      <categories>
+        <category>云开发</category>
+      </categories>
+      <tags>
+        <tag>Cloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SWS3004-Lecture 3: Big Data Architecture and Patterns</title>
+    <url>/2023/08/08/SWS3004-Lecture-3/</url>
+    <content><![CDATA[<p>L3 is about Big Data Architecture and Patterns.</p>
+<span id="more"></span>
+<h2 id="overview">Overview</h2>
+<ul>
+<li><p>Big Data and Big Data Architectures</p></li>
+<li><p>Platforms</p>
+<ul>
+<li><p>MapReduce, Hadoop, and HDFS</p></li>
+<li><p>Spark</p></li>
+<li><p>Cloud Dataflow and Beam</p></li>
+</ul></li>
+</ul>
+<h1 id="big-data-and-big-data-architectures">Big Data and Big Data
+Architectures</h1>
+<h2 id="big-data">Big Data</h2>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/1.png" alt="Big Data Characteristics" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="big-data-architectures">Big Data Architectures</h2>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/2.png" alt="Big Data Architectures" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="big-data-platform-and-applications">Big Data Platform and
+Applications</h2>
+<ul>
+<li><p>Multicore/Cluster era → parallel and distributed
+applications</p></li>
+<li><p>Parallelism</p>
+<ul>
+<li><p>Task-parallel</p></li>
+<li><p>Data-parallel</p>
+<ul>
+<li><p>Batch (MapReduce, Spark, Cloud Dataflow)</p></li>
+<li><p>Stream (Spark Streaming, Flink, Cloud Dataflow)</p></li>
+</ul></li>
+<li><p>Mixed</p></li>
+</ul></li>
+<li><p>System resource demand</p>
+<ul>
+<li><p>Compute-intensive</p></li>
+<li><p>Data-intensive</p></li>
+<li><p>Mixed</p></li>
+</ul></li>
+</ul>
+<h1 id="platforms">Platforms</h1>
+<h2 id="mapreduce-hadoop-and-hdfs">MapReduce, Hadoop, and HDFS</h2>
+<h3 id="mapreduce-programming-model">MapReduce Programming Model</h3>
+<ul>
+<li><p>Supports arbitrarily divisible workload</p></li>
+<li><p>Supports distributed computing on large data sets on multiple
+machines (clusters, public or private clouds, …)</p></li>
+<li><p>How large an amount of work?</p>
+<ul>
+<li><p>Web-scale data on the order of 100s of GBs to TBs or PBs</p></li>
+<li><p>Input data set will not likely fit on a single computer’s hard
+drive</p></li>
+<li><p>Distributed file system (e.g., Google File System- GFS) is
+typically required</p></li>
+</ul></li>
+<li><p>Inspired by the <strong>map</strong> and <strong>reduce</strong>
+functions in functional programming languages</p></li>
+<li><p><strong>Key idea</strong></p>
+<ul>
+<li><strong>Split</strong> data into blocks and assign each block to an
+instance/process for parallel execution</li>
+<li><strong>Merge</strong> partial results produced by individual
+instances after all instances completed execution</li>
+</ul></li>
+<li><p>Transform a set of <strong>input &lt;key, value&gt;</strong>
+pairs into a set of <strong>output &lt;key, value&gt;</strong>
+pairs</p></li>
+<li><p><strong>SPMD (Same Program Multiple Data)</strong> - a master
+instance partitions the data and gathers the partial results</p></li>
+</ul>
+<h4 id="structure-of-a-mapreduce-program">Structure of a MapReduce
+Program</h4>
+<ol type="1">
+<li><p>Read (a lot of) data</p></li>
+<li><p><strong>MAP</strong> (extract data you need from each
+record)</p></li>
+<li><p>Shuffle and Sort data</p></li>
+<li><p><strong>REDUCE</strong> (aggregate, summarize, filter, transform
+extracted data)</p></li>
+<li><p>Write the results</p></li>
+</ol>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/3.png" alt="MapReduce" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/4.png" alt="High-level View of MapReduce" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/5.png" alt="MapReduce Execution" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/6.png" alt="Parallelism in MapReduce" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h3 id="hadoop">Hadoop</h3>
+<ul>
+<li><p><strong>Google MapReduce</strong> - <strong>closed</strong>
+source developed by Google (2004) to process large amounts of raw
+data</p></li>
+<li><p><strong>Hadoop MapReduce</strong> – <strong>open</strong> source
+developed by Apache + Yahoo (Java programming language) – a popular
+implementation of MapReduce</p></li>
+<li><p>Presents MapReduce as an analytics engine with a distributed
+storage layer referred to as Hadoop Distributed File System
+(<em>HDFS</em>); HDFS mimics Google File System (<em>GFS</em>)</p></li>
+<li><p>Example: Amazon Elastic MapReduce creates a Hadoop cluster and
+handles data transfers between Amazon EC2 (computation) and Amazon S3
+(storage)</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/7.png" alt="Hadoop Architecture" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/8.png" alt="Hadoop on Multi-node" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/9.png" alt="Hadoop Distributed File System" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="spark">Spark</h2>
+<h3 id="apache-spark">Apache Spark</h3>
+<ul>
+<li><p>Distributed processing framework and programming model for big
+data workloads</p></li>
+<li><p>Utilizes in-memory caching, and optimized query execution for
+fast analytic queries against data of any size</p></li>
+<li><p>It provides development APIs in Java, Scala, Python and R, and
+supports code reuse across multiple workloads:</p>
+<ul>
+<li><p>Batch processing</p></li>
+<li><p>Machine Learning</p></li>
+<li><p>Interactive queries</p></li>
+<li><p>Real-time analytics</p></li>
+</ul></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/10.png" alt="Apache Spark" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h3 id="spark-rdd">Spark RDD</h3>
+<ul>
+<li><p>Main abstraction: <strong>resilient distributed dataset
+(RDD)</strong> - a collection of elements partitioned across the nodes
+of the cluster that can be operated on in parallel.</p></li>
+<li><p>RDD - created from the file system or through operations
+(transformations)</p></li>
+<li><p>Option to <em>persist</em> an RDD in memory or on disk to be
+reused efficiently across parallel operations</p></li>
+<li><p>RDD used for fault tolerance: recover from node failures</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/11.png" alt="Spark Execution" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="cloud-dataflow-and-beam">Cloud Dataflow and Beam</h2>
+<h3 id="google-cloud-dataflow">Google Cloud Dataflow</h3>
+<p>“<strong>The Dataflow Model</strong>: A Practical Approach to
+Balancing Correctness, Latency, and Cost in Massive-Scale, Unbounded,
+Out-of-Order Data Processing"</p>
+<p><a href="https://research.google.com/pubs/archive/43864.pdf">reference</a></p>
+<h3 id="apache-beam">Apache Beam</h3>
+<ul>
+<li><p>Parallel computing framework for data processing</p></li>
+<li><p>Multiple SDKs (Java, Python, Go, Scala)</p></li>
+<li><p>Unified data model (PCollection):</p>
+<ul>
+<li>batch (bounded)</li>
+<li>streaming (unbounded)</li>
+</ul></li>
+<li><p>Pipelines containing data processing operations (PTransform)</p>
+<ul>
+<li><p>Source transforms</p></li>
+<li><p>Processing and Conversion transforms (Count, Sum, Map,
+GroupBy)</p></li>
+<li><p>Outputting Transforms</p></li>
+<li><p>Used defined transforms</p></li>
+</ul></li>
+<li><p>Run on multiple execution engines called Runners</p>
+<ul>
+<li><p>DirectRunner (Local)</p></li>
+<li><p>Google Dataflow</p></li>
+<li><p>Apache Spark</p></li>
+<li><p>Hadoop</p></li>
+<li><p>Apache Flink</p></li>
+</ul></li>
+</ul>
+]]></content>
+      <categories>
+        <category>云开发</category>
+      </categories>
+      <tags>
+        <tag>Cloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SWS3004-Lecture 2: Applications and Paradigms</title>
+    <url>/2023/08/03/SWS3004-Lecture-2/</url>
+    <content><![CDATA[<p>L2 is about Application and Paradigms of Cloud Computing.</p>
+<span id="more"></span>
+<h2 id="outline">Outline</h2>
+<ul>
+<li>Cloud Applications
+<ul>
+<li>Common Features</li>
+<li>Applications</li>
+<li>Challenges in Developing Applications</li>
+<li>Architectural Styles for Cloud Applications</li>
+</ul></li>
+<li>Cloud Application Development Models
+<ul>
+<li>Characteristics of Cloud Service Models</li>
+<li>Examples of Setting up a Blog</li>
+</ul></li>
+</ul>
+<h2 id="key-terms">Key Terms</h2>
+<ol type="1">
+<li><p>Divisible workload</p></li>
+<li><p>Performance isolation</p></li>
+<li><p>Web application architecture layers</p></li>
+<li><p>Application development models (IaaS, PaaS, SaaS)</p></li>
+</ol>
+<h1 id="cloud-applications">Cloud Applications</h1>
+<h2 id="common-features-of-cloud-providers">Common Features of Cloud
+Providers</h2>
+<ul>
+<li><p><strong>Basic and higher</strong> - level services (IaaS -&gt;
+SaaS).</p></li>
+<li><p><strong>Compute and storage resources</strong> - virtual servers
+(Linux and Windows) and object store.</p></li>
+<li><p><strong>Deployment management services</strong> - load balancer,
+auto scaling, message queueing, monitoring, ….</p></li>
+<li><p><strong>User interface</strong> - graphical user interface,
+command-line interface.</p></li>
+</ul>
+<h2 id="cloud-applications-1">Cloud Applications</h2>
+<ul>
+<li>Focus mainly on <strong>enterprise computing</strong>.</li>
+<li>Ideally, an application can partition its workload into
+<strong>n</strong> segments and spawn <strong>n</strong> instances, and
+the execution time reduced by a factor close to <strong>n</strong>.
+(<strong>MapReduce</strong>)</li>
+<li><strong>Key Challenges</strong>
+<ul>
+<li><strong>cloud consumer</strong>: scale application to accommodate a
+dynamic load, recover after a system failure, efficiently support
+checkpoint/restart</li>
+<li><strong>cloud provider</strong>: manage a large number of systems
+(cloud consumer applications), provides quality of service
+guarantee</li>
+</ul></li>
+<li><strong>Ideal Applications</strong>
+<ul>
+<li>web services</li>
+<li>database services</li>
+<li>search services</li>
+<li>machine learning with massive-scale models</li>
+</ul></li>
+<li><strong>Unlikely to perform well</strong>
+<ul>
+<li>applications with a <strong>complex workflow</strong> and
+<strong>multiple dependencies</strong> such as high-performance
+computing</li>
+<li>applications with <strong>intensive communication</strong> among
+concurrent instances</li>
+<li>workload <strong>cannot be arbitrarily partitioned</strong></li>
+</ul></li>
+</ul>
+<h2 id="challenges-in-developing-cloud-applications">Challenges in
+Developing Cloud Applications</h2>
+<ul>
+<li><p><strong>Performance isolation</strong> – how to ensure that
+customer performance is not affected by other users?</p></li>
+<li><p><strong>Reliability</strong> - major concern, server failures
+expected when a large number of servers cooperate to compute.</p></li>
+<li><p>Cloud infrastructure exhibits <strong>latency</strong> and
+<strong>bandwidth</strong> fluctuations which affect the application
+performance.</p></li>
+<li><p>Performance considerations limit the amount of <em>data
+logging</em> (identify unexpected results, errors, monitor application
+performance).</p></li>
+</ul>
+<h2 id="architectural-styles-for-cloud-applications">Architectural
+Styles for Cloud Applications</h2>
+<ul>
+<li><p>Reliance on Internet and web technology (high accessibility, web
+browser universality, ease of web-based service development).</p></li>
+<li><p>Cloud services use web technology as both the
+<strong>implementation medium</strong> and <strong>management
+interface</strong>.</p></li>
+<li><p>2 basic components of the web are <strong>web browser
+client</strong> and <strong>web server</strong>, i.e., based on
+<strong>client-server architecture</strong>.</p></li>
+</ul>
+<p><img src="/images/sws3004-lec2/1.png" alt="3-Tier Web Applications"></p>
+<h3 id="as-a-service-cloud-delivery-models">“as-a-Service” Cloud
+Delivery Models</h3>
+<ol type="1">
+<li><p><strong>Simple Object Access Protocol (SOAP) </strong>:
+Application protocol for web applications; defines a common web service
+messaging format for request and response message exchanges; based on
+the XML, uses TCP or UDP transport protocols.</p></li>
+<li><p><strong>Representational State Transfer (REST)</strong>: software
+architecture for distributed hypermedia systems. Supports client
+communication with stateless servers, platform and language independent,
+supports data caching, and can be used in the presence of
+firewalls.</p></li>
+</ol>
+<p>Rest is better in simplicity, flexibility, efficiency and
+scalability, which is suitable for web applications. SOAP is suitable
+for applications requiring higher security, transaction handling, and
+reliability, particularly in enterprise-level applications.</p>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec2/2.png" alt="Web Services for Cloud Applications - Example" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h1 id="cloud-application-development-models"><strong>Cloud Application
+Development Models</strong></h1>
+<h2 id="characteristics-of-cloud-service-models">Characteristics of
+Cloud Service Models</h2>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec2/3.png" alt="User and Service Provider Responsibilities in Different Models" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h3 id="infrastructure-as-a-service-for-it-architects">Infrastructure as
+a Service (for IT architects)</h3>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec2/4.png" alt="Infrastructure as a Service" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<ul>
+<li><p>Web access to resources</p></li>
+<li><p>Centralized physical resource management</p></li>
+<li><p>Elastic services and dynamic scaling</p></li>
+<li><p>Shared infrastructure across multiple users</p></li>
+<li><p>Preconfigured VMs</p></li>
+<li><p>Metered services</p></li>
+</ul>
+<h3 id="platform-as-a-service-for-developers">Platform as a Service (for
+developers)</h3>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec2/5.png" alt="Platform as a Service" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<ul>
+<li><p>All in one – same IDE to develop, test, deploy, host and maintain
+applications</p></li>
+<li><p>Web access to development platforms</p></li>
+<li><p>Offline access for developers</p></li>
+<li><p>Built-in scalability</p></li>
+<li><p>Collaborative platform for developers</p></li>
+<li><p>Diverse client tools</p></li>
+</ul>
+<h3 id="software-as-a-service-for-end-users">Software as a Service (for
+end users)</h3>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec2/6.png" alt="Software as a Service" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<ul>
+<li><p><strong>Multi-tenanted</strong> applications</p></li>
+<li><p>Web access</p></li>
+<li><p>Centralized management of SaaS services</p></li>
+<li><p>Multi-device support</p></li>
+<li><p>Scalability under varying loads</p></li>
+<li><p>High availability</p></li>
+<li><p>API integration with other software</p></li>
+</ul>
+<h2 id="examples-of-setting-up-a-blog">Examples of Setting up a
+Blog</h2>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec2/7.png" alt="Examples of Setting up a Blog" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="bonus-track-function-as-a-service">Bonus Track: Function as a
+Service</h2>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec2/8.png" alt="Function as a Service" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec2/9.png" alt="Lambda" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+]]></content>
+      <categories>
+        <category>云开发</category>
+      </categories>
+      <tags>
+        <tag>Cloud</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SWS3004-Lecture 1: Concepts and Models</title>
     <url>/2023/07/28/SWS3004-Lecture-1/</url>
-    <content><![CDATA[<p>L1 is Concepts and Models of Cloud Computing.</p>
+    <content><![CDATA[<p>L1 is about Concepts and Models of Cloud Computing.</p>
 <span id="more"></span>
 <h2 id="outline">Outline</h2>
 <ul>
