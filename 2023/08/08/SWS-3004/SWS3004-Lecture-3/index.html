@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>SWS3004-Lecture 3: Big Data Architecture and Patterns - AryCra_07&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="AryCra07"><meta name="msapplication-TileImage" content="/images/icon1.jpg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="AryCra07"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="L3 is about Big Data Architecture and Patterns."><meta property="og:type" content="blog"><meta property="og:title" content="SWS3004-Lecture 3: Big Data Architecture and Patterns"><meta property="og:url" content="http://example.com/2023/08/08/SWS-3004/SWS3004-Lecture-3/"><meta property="og:site_name" content="AryCra_07&#039;s Blog"><meta property="og:description" content="L3 is about Big Data Architecture and Patterns."><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://example.com/images/sws3004-lec3/1.png"><meta property="og:image" content="http://example.com/images/sws3004-lec3/2.png"><meta property="og:image" content="http://example.com/images/sws3004-lec3/3.png"><meta property="og:image" content="http://example.com/images/sws3004-lec3/4.png"><meta property="og:image" content="http://example.com/images/sws3004-lec3/5.png"><meta property="og:image" content="http://example.com/images/sws3004-lec3/6.png"><meta property="og:image" content="http://example.com/images/sws3004-lec3/7.png"><meta property="og:image" content="http://example.com/images/sws3004-lec3/8.png"><meta property="og:image" content="http://example.com/images/sws3004-lec3/9.png"><meta property="og:image" content="http://example.com/images/sws3004-lec3/10.png"><meta property="og:image" content="http://example.com/images/sws3004-lec3/11.png"><meta property="article:published_time" content="2023-08-08T06:03:50.632Z"><meta property="article:modified_time" content="2023-08-23T15:10:40.422Z"><meta property="article:author" content="AryCra_07"><meta property="article:tag" content="Cloud"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://example.com/images/sws3004-lec3/1.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2023/08/08/SWS-3004/SWS3004-Lecture-3/"},"headline":"SWS3004-Lecture 3: Big Data Architecture and Patterns","image":["http://example.com/images/sws3004-lec3/1.png","http://example.com/images/sws3004-lec3/2.png","http://example.com/images/sws3004-lec3/3.png","http://example.com/images/sws3004-lec3/4.png","http://example.com/images/sws3004-lec3/5.png","http://example.com/images/sws3004-lec3/6.png","http://example.com/images/sws3004-lec3/7.png","http://example.com/images/sws3004-lec3/8.png","http://example.com/images/sws3004-lec3/9.png","http://example.com/images/sws3004-lec3/10.png","http://example.com/images/sws3004-lec3/11.png"],"datePublished":"2023-08-08T06:03:50.632Z","dateModified":"2023-08-23T15:10:40.422Z","author":{"@type":"Person","name":"AryCra_07"},"publisher":{"@type":"Organization","name":"AryCra_07's Blog","logo":{"@type":"ImageObject","url":"http://example.com/images/icon1.jpg"}},"description":"L3 is about Big Data Architecture and Patterns."}</script><link rel="canonical" href="http://example.com/2023/08/08/SWS-3004/SWS3004-Lecture-3/"><link rel="icon" href="/images/icon1.jpg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/icon1.jpg" alt="AryCra_07&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/think/">成于思</a><a class="navbar-item" href="/study/">勤于学</a><a class="navbar-item" href="/tech/">敏于行</a><a class="navbar-item" href="/life">歌于途</a><a class="navbar-item" href="/about/">关于我</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/AryCra07"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-08-08T06:03:50.632Z" title="2023/8/8 14:03:50">2023-08-08</time>发表</span><span class="level-item"><time dateTime="2023-08-23T15:10:40.422Z" title="2023/8/23 23:10:40">2023-08-23</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E4%BA%91%E5%BC%80%E5%8F%91/">云开发</a></span><span class="level-item">4 分钟读完 (大约542个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">SWS3004-Lecture 3: Big Data Architecture and Patterns</h1><div class="content"><p>L3 is about Big Data Architecture and Patterns.</p>
+<span id="more"></span>
+<h2 id="overview">Overview</h2>
+<ul>
+<li><p>Big Data and Big Data Architectures</p></li>
+<li><p>Platforms</p>
+<ul>
+<li><p>MapReduce, Hadoop, and HDFS</p></li>
+<li><p>Spark</p></li>
+<li><p>Cloud Dataflow and Beam</p></li>
+</ul></li>
+</ul>
+<h1 id="big-data-and-big-data-architectures">Big Data and Big Data
+Architectures</h1>
+<h2 id="big-data">Big Data</h2>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/1.png" alt="Big Data Characteristics" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="big-data-architectures">Big Data Architectures</h2>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/2.png" alt="Big Data Architectures" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="big-data-platform-and-applications">Big Data Platform and
+Applications</h2>
+<ul>
+<li><p>Multicore/Cluster era → parallel and distributed
+applications</p></li>
+<li><p>Parallelism</p>
+<ul>
+<li><p>Task-parallel</p></li>
+<li><p>Data-parallel</p>
+<ul>
+<li><p>Batch (MapReduce, Spark, Cloud Dataflow)</p></li>
+<li><p>Stream (Spark Streaming, Flink, Cloud Dataflow)</p></li>
+</ul></li>
+<li><p>Mixed</p></li>
+</ul></li>
+<li><p>System resource demand</p>
+<ul>
+<li><p>Compute-intensive</p></li>
+<li><p>Data-intensive</p></li>
+<li><p>Mixed</p></li>
+</ul></li>
+</ul>
+<h1 id="platforms">Platforms</h1>
+<h2 id="mapreduce-hadoop-and-hdfs">MapReduce, Hadoop, and HDFS</h2>
+<h3 id="mapreduce-programming-model">MapReduce Programming Model</h3>
+<ul>
+<li><p>Supports arbitrarily divisible workload</p></li>
+<li><p>Supports distributed computing on large data sets on multiple
+machines (clusters, public or private clouds, …)</p></li>
+<li><p>How large an amount of work?</p>
+<ul>
+<li><p>Web-scale data on the order of 100s of GBs to TBs or PBs</p></li>
+<li><p>Input data set will not likely fit on a single computer’s hard
+drive</p></li>
+<li><p>Distributed file system (e.g., Google File System- GFS) is
+typically required</p></li>
+</ul></li>
+<li><p>Inspired by the <strong>map</strong> and <strong>reduce</strong>
+functions in functional programming languages</p></li>
+<li><p><strong>Key idea</strong></p>
+<ul>
+<li><strong>Split</strong> data into blocks and assign each block to an
+instance/process for parallel execution</li>
+<li><strong>Merge</strong> partial results produced by individual
+instances after all instances completed execution</li>
+</ul></li>
+<li><p>Transform a set of <strong>input &lt;key, value&gt;</strong>
+pairs into a set of <strong>output &lt;key, value&gt;</strong>
+pairs</p></li>
+<li><p><strong>SPMD (Same Program Multiple Data)</strong> - a master
+instance partitions the data and gathers the partial results</p></li>
+</ul>
+<h4 id="structure-of-a-mapreduce-program">Structure of a MapReduce
+Program</h4>
+<ol type="1">
+<li><p>Read (a lot of) data</p></li>
+<li><p><strong>MAP</strong> (extract data you need from each
+record)</p></li>
+<li><p>Shuffle and Sort data</p></li>
+<li><p><strong>REDUCE</strong> (aggregate, summarize, filter, transform
+extracted data)</p></li>
+<li><p>Write the results</p></li>
+</ol>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/3.png" alt="MapReduce" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/4.png" alt="High-level View of MapReduce" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/5.png" alt="MapReduce Execution" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/6.png" alt="Parallelism in MapReduce" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h3 id="hadoop">Hadoop</h3>
+<ul>
+<li><p><strong>Google MapReduce</strong> - <strong>closed</strong>
+source developed by Google (2004) to process large amounts of raw
+data</p></li>
+<li><p><strong>Hadoop MapReduce</strong> – <strong>open</strong> source
+developed by Apache + Yahoo (Java programming language) – a popular
+implementation of MapReduce</p></li>
+<li><p>Presents MapReduce as an analytics engine with a distributed
+storage layer referred to as Hadoop Distributed File System
+(<em>HDFS</em>); HDFS mimics Google File System (<em>GFS</em>)</p></li>
+<li><p>Example: Amazon Elastic MapReduce creates a Hadoop cluster and
+handles data transfers between Amazon EC2 (computation) and Amazon S3
+(storage)</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/7.png" alt="Hadoop Architecture" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/8.png" alt="Hadoop on Multi-node" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/9.png" alt="Hadoop Distributed File System" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="spark">Spark</h2>
+<h3 id="apache-spark">Apache Spark</h3>
+<ul>
+<li><p>Distributed processing framework and programming model for big
+data workloads</p></li>
+<li><p>Utilizes in-memory caching, and optimized query execution for
+fast analytic queries against data of any size</p></li>
+<li><p>It provides development APIs in Java, Scala, Python and R, and
+supports code reuse across multiple workloads:</p>
+<ul>
+<li><p>Batch processing</p></li>
+<li><p>Machine Learning</p></li>
+<li><p>Interactive queries</p></li>
+<li><p>Real-time analytics</p></li>
+</ul></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/10.png" alt="Apache Spark" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h3 id="spark-rdd">Spark RDD</h3>
+<ul>
+<li><p>Main abstraction: <strong>resilient distributed dataset
+(RDD)</strong> - a collection of elements partitioned across the nodes
+of the cluster that can be operated on in parallel.</p></li>
+<li><p>RDD - created from the file system or through operations
+(transformations)</p></li>
+<li><p>Option to <em>persist</em> an RDD in memory or on disk to be
+reused efficiently across parallel operations</p></li>
+<li><p>RDD used for fault tolerance: recover from node failures</p></li>
+</ul>
+<div style="text-align: center;">
+<p><img src="/images/sws3004-lec3/11.png" alt="Spark Execution" style="width: 90%; height: 90%; display: block; margin: 0 auto;"></p>
+</div>
+<h2 id="cloud-dataflow-and-beam">Cloud Dataflow and Beam</h2>
+<h3 id="google-cloud-dataflow">Google Cloud Dataflow</h3>
+<p>“<strong>The Dataflow Model</strong>: A Practical Approach to
+Balancing Correctness, Latency, and Cost in Massive-Scale, Unbounded,
+Out-of-Order Data Processing"</p>
+<p><a target="_blank" rel="noopener" href="https://research.google.com/pubs/archive/43864.pdf">reference</a></p>
+<h3 id="apache-beam">Apache Beam</h3>
+<ul>
+<li><p>Parallel computing framework for data processing</p></li>
+<li><p>Multiple SDKs (Java, Python, Go, Scala)</p></li>
+<li><p>Unified data model (PCollection):</p>
+<ul>
+<li>batch (bounded)</li>
+<li>streaming (unbounded)</li>
+</ul></li>
+<li><p>Pipelines containing data processing operations (PTransform)</p>
+<ul>
+<li><p>Source transforms</p></li>
+<li><p>Processing and Conversion transforms (Count, Sum, Map,
+GroupBy)</p></li>
+<li><p>Outputting Transforms</p></li>
+<li><p>Used defined transforms</p></li>
+</ul></li>
+<li><p>Run on multiple execution engines called Runners</p>
+<ul>
+<li><p>DirectRunner (Local)</p></li>
+<li><p>Google Dataflow</p></li>
+<li><p>Apache Spark</p></li>
+<li><p>Hadoop</p></li>
+<li><p>Apache Flink</p></li>
+</ul></li>
+</ul>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Cloud/">Cloud</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2023/08/10/SWS-3004/SWS3004-Lecture-4/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">SWS3004-Lecture 4: Cloud Software Development and Deployment</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/08/03/SWS-3004/SWS3004-Lecture-2/"><span class="level-item">SWS3004-Lecture 2: Applications and Paradigms</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/images/avatar1.jpg" alt="AryCra07"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AryCra07</p><p class="is-size-6 is-block">Hasta la victoria siempre!</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">16</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">6</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">11</p></a></div></div></nav><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AryCra07"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="知乎" href="https://www.zhihu.com/people/kuai-le-le-guan-de-xiao-le"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="E-Mail" href="mailto:703810491@qq.com"><i class="fa fa-envelope"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Telegram" href="https://t.me/arycra07"><i class="fab fa-telegram"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><ul class="menu-list"><li><a class="level is-mobile" href="#overview"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">Overview</span></span></a></li></ul><li><a class="level is-mobile" href="#big-data-and-big-data-architectures"><span class="level-left"><span class="level-item">2</span><span class="level-item">Big Data and Big Data
+Architectures</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#big-data"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">Big Data</span></span></a></li><li><a class="level is-mobile" href="#big-data-architectures"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">Big Data Architectures</span></span></a></li><li><a class="level is-mobile" href="#big-data-platform-and-applications"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">Big Data Platform and
+Applications</span></span></a></li></ul></li><li><a class="level is-mobile" href="#platforms"><span class="level-left"><span class="level-item">3</span><span class="level-item">Platforms</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#mapreduce-hadoop-and-hdfs"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">MapReduce, Hadoop, and HDFS</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#mapreduce-programming-model"><span class="level-left"><span class="level-item">3.1.1</span><span class="level-item">MapReduce Programming Model</span></span></a></li><li><a class="level is-mobile" href="#hadoop"><span class="level-left"><span class="level-item">3.1.2</span><span class="level-item">Hadoop</span></span></a></li></ul></li><li><a class="level is-mobile" href="#spark"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">Spark</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#apache-spark"><span class="level-left"><span class="level-item">3.2.1</span><span class="level-item">Apache Spark</span></span></a></li><li><a class="level is-mobile" href="#spark-rdd"><span class="level-left"><span class="level-item">3.2.2</span><span class="level-item">Spark RDD</span></span></a></li></ul></li><li><a class="level is-mobile" href="#cloud-dataflow-and-beam"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">Cloud Dataflow and Beam</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#google-cloud-dataflow"><span class="level-left"><span class="level-item">3.3.1</span><span class="level-item">Google Cloud Dataflow</span></span></a></li><li><a class="level is-mobile" href="#apache-beam"><span class="level-left"><span class="level-item">3.3.2</span><span class="level-item">Apache Beam</span></span></a></li></ul></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/icon1.jpg" alt="AryCra_07&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 AryCra_07</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
