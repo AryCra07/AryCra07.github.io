@@ -283,150 +283,6 @@ the logs for my function hello, shown as Figure 18 and Figure 19.</p>
       </tags>
   </entry>
   <entry>
-    <title>SWS3004-Lab Exercise 2</title>
-    <url>/2023/07/28/SWS-3004/AWS-Lab2/</url>
-    <content><![CDATA[<p>This Lab is about Hadoop and Spark, using AWS EMR and S3.</p>
-<span id="more"></span>
-<h1 id="exercise-2.1">Exercise 2.1</h1>
-<blockquote>
-<p>Run and compare the execution time of WordCount on Wikipidia’s dump
-with both Hadoop MapReduce and Spark. You can use either IaaS or PaaS,
-but make sure you use the same type of setup for both Hadoop and Spark
-(e.g., if you use EMR for Hadoop MapReduce, then use EMR for Spark
-also). You have to use the provided input of size 12 GB. Is there any
-difference in the programming model and ease of programming? Is there
-any difference in performance? Please explain it in maximum 3
-paragraphs. You can include up to 2 performance plots.</p>
-<p>Input dataset address on AWS S3:
-s3://sws3004-2023/input/enwiki-12GB.xml</p>
-<p>You must use this input dataset for both Hadoop MapReduce and
-Spark.</p>
-<p>(Tip: use the entire address s3://sws3004-2023/input/enwiki-12GB.xml
-as parameter to your MapReduce job)</p>
-</blockquote>
-<h3 id="part-1.-hadoop-mapreduce">Part 1. Hadoop Mapreduce</h3>
-<p>First I create a S3 bucket and upload files:</p>
-<p><img src="/images/sws3004-lab2/722-1.png" alt="S3 bucket"></p>
-<p>Then I create an EMR cluster, select the S3 bucket created in the
-previous step as my S3 folder, and select m4.large and default 3
-instances as the instance configuration.</p>
-<p><img src="/images/sws3004-lab2/722-3.png" alt="EMR"></p>
-<p>Now add a step, using <code>WordCount.jar</code> to process the input
-from <code>s3://sws3004-2023/input/enwiki-12GB.xml</code>.</p>
-<p><img src="/images/sws3004-lab2/722-6.png" alt="EMR Step"></p>
-<p>In my S3 bucket, I can check the output when the step finished.</p>
-<p><img src="/images/sws3004-lab2/722-9.png" alt="Check the Output"></p>
-<p><strong>Hadoop MapReduce performance:</strong> The process takes 42
-minutes totally.</p>
-<p><img src="/images/sws3004-lab2/722-8.png" alt="Hadoop MapReduce Performance"></p>
-<h3 id="part-2.-spark">Part 2. Spark</h3>
-<p>I clear the S3 bucket and upload the files of Spark:</p>
-<p><img src="/images/sws3004-lab2/722-17.png" alt="Spark"></p>
-<p>Then create a new EMR for Spark, and add a step.</p>
-<p><img src="/images/sws3004-lab2/722-18.png" alt="EMR Step"></p>
-<p><strong>Spark performance:</strong> The process takes 16 minutes
-totally.</p>
-<p><strong>It seems that Spark is better than Hadoop in performance.
-</strong> The reason is Hadoop uses disk to store data while Spark uses
-memory to store data, which can reduce the I/O time. Also, MapReduce
-requires a lot of time to sort during Shuffle, and sorting seems
-inevitable in MapReduce's Shuffle. When Spark is in Shuffle, sorting is
-only required for some situations, which is faster.</p>
-<h3 id="is-there-any-difference-in-the-programming-model-and-ease-of-programming">Is
-there any difference in the programming model and ease of
-programming?</h3>
-<p><strong>Hadoop MapReduce:</strong> Hadoop MapReduce is a programming
-model designed for distributed data processing on large clusters of
-commodity hardware. The MapReduce programming model has two steps to
-process our data: Map and Reduce.</p>
-<ul>
-<li><strong>Map:</strong> In the Map phase, the input data is divided
-into splits, and each split is processed independently by multiple
-mapper tasks in parallel. The mapper tasks extract key-value pairs from
-the input data and emit intermediate key-value pairs.</li>
-<li><strong>Shuffle and Sort:</strong> The intermediate key-value pairs
-emitted by the mappers are shuffled and sorted based on the keys. This
-step ensures that all values for the same key are grouped together and
-sent to the same reducer task.</li>
-<li><strong>Reduce:</strong> In the Reduce phase, the sorted and
-shuffled intermediate data is processed by reducer tasks. Each reducer
-task processes a subset of the intermediate data, grouped by keys. The
-reducer tasks aggregate the values associated with each key and produce
-the final output.</li>
-</ul>
-<p><strong>Spark:</strong> <strong>Spark is a better distributed data
-processing engine</strong>, which extends the MapReduce model and offers
-more versatility and performance improvements. Spark introduces the
-concept of Resilient Distributed Datasets (RDDs), which are the
-fundamental data abstraction in Spark. RDDs are distributed collections
-of data that can be processed in parallel.</p>
-<p>Spark provides a more general programming model compared to Hadoop
-MapReduce. It supports not only Map and Reduce operations but also
-various other transformations and actions on RDDs, such as filter, join,
-groupByKey, reduceByKey and so on. Additionally, Spark offers
-specialized libraries like Spark SQL for structured data processing,
-Spark Streaming for real-time data streaming, and MLlib for machine
-learning tasks.</p>
-<p><strong>Difference in Programming Model and Ease of
-Programming:</strong></p>
-<p>I found a comparison form in Lecture slides:</p>
-<p><img src="/images/sws3004-lab2/722-7.jpg" alt="Comparision"></p>
-<ol type="1">
-<li><strong>Programming Model:</strong>
-<ul>
-<li>Hadoop MapReduce has a more rigid programming model, where data is
-processed in two distinct phases (Map and Reduce), and users need to
-explicitly handle intermediate data shuffle and sort.</li>
-<li>Spark provides a more flexible and expressive programming model with
-RDDs, allowing users to perform complex operations on distributed data
-through a wide range of transformations and actions.</li>
-</ul></li>
-<li><strong>Ease of Programming:</strong>
-<ul>
-<li>Spark generally offers better ease of programming due to its
-high-level APIs and expressive transformations and actions on RDDs. It
-simplifies the development of distributed data processing applications,
-and its concise syntax often leads to shorter and more readable code
-compared to Hadoop MapReduce.</li>
-<li>Hadoop MapReduce, being more low-level, might require developers to
-write additional code for tasks like intermediate data serialization and
-deserialization, which can make the development process more
-cumbersome.</li>
-</ul></li>
-</ol>
-<p>In summary, Spark provides a more powerful and user-friendly
-programming model compared to Hadoop MapReduce. Spark's RDDs and
-higher-level APIs make it easier for developers to write distributed
-data processing applications, leading to faster development cycles and
-more efficient data processing.</p>
-<h1 id="exercise-2.2">Exercise 2.2</h1>
-<blockquote>
-<p>Write and run on AWS EMR a MapReduce program that computes the total
-number of followers and followees for each user in a Twitter dataset.
-The dataset is provided to you in the file <em>twitter_combined.txt</em>
-taken from http://snap.stanford.edu/data/egonets-Twitter.html. Each line
-of this file contains two user ids A and B meaning “<em>User A follows
-User B</em>”. For example, the first line is “214328887 34428380” and it
-means that “User 214328887 follows User 34428380”.</p>
-</blockquote>
-<p>My code is below:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// here is the map</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Map</span> <span class="keyword">extends</span> <span class="title class_">Mapper</span>&lt;LongWritable, Text, Text, IntWritable&gt; {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">map</span><span class="params">(LongWritable key, Text texts, Context context)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, InterruptedException {</span><br><span class="line">        String[] users = texts.toString().split(<span class="string">" "</span>); <span class="comment">// split as user0 user1</span></span><br><span class="line">        <span class="type">IntWritable</span> <span class="variable">followers</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntWritable</span>(-<span class="number">1</span>); <span class="comment">// negative</span></span><br><span class="line">        <span class="type">IntWritable</span> <span class="variable">follows</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntWritable</span>(<span class="number">1</span>); <span class="comment">// positive</span></span><br><span class="line">        context.write(<span class="keyword">new</span> <span class="title class_">Text</span>(users[<span class="number">1</span>]), followers);</span><br><span class="line">        context.write(<span class="keyword">new</span> <span class="title class_">Text</span>(users[<span class="number">0</span>]), follows);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// here is the reduce</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Reduce</span> <span class="keyword">extends</span> <span class="title class_">Reducer</span>&lt;Text, IntWritable, Text, Text&gt; {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">reduce</span><span class="params">(Text texts, Iterable&lt;IntWritable&gt; values, Context context)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, InterruptedException {</span><br><span class="line">        <span class="type">int</span> <span class="variable">follows</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">followers</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (IntWritable text : texts) {</span><br><span class="line">            <span class="keyword">if</span> (text.get() &gt; <span class="number">0</span>) {</span><br><span class="line">                follows += text.get();</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                followers -= text.get();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// output the result for each user</span></span><br><span class="line">        context.write(texts, <span class="keyword">new</span> <span class="title class_">Text</span>(String.format(<span class="string">"Followers %d"</span>, inDegree)));</span><br><span class="line">        context.write(texts, <span class="keyword">new</span> <span class="title class_">Text</span>(String.format(<span class="string">"Follows %d"</span>, outDegree)));</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<p>Then we create a S3 and upload the files:</p>
-<p><img src="/images/sws3004-lab2/722-13.png" alt="S3"></p>
-<p>Now we can add a step in EMR and view the final output:</p>
-<p><img src="/images/sws3004-lab2/722-15.png" alt="Step"></p>
-<p><img src="/images/sws3004-lab2/722-16.png" alt="Result"></p>
-<p>So User 214328887 has 628 followers, and follows 951 users.</p>
-]]></content>
-      <categories>
-        <category>云开发</category>
-      </categories>
-      <tags>
-        <tag>Cloud</tag>
-        <tag>Lab</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SWS3004-Lecture 1: Concepts and Models</title>
     <url>/2023/07/28/SWS-3004/SWS3004-Lecture-1/</url>
     <content><![CDATA[<p>L1 is about Concepts and Models of Cloud Computing.</p>
@@ -569,6 +425,150 @@ community</li>
       </categories>
       <tags>
         <tag>Cloud</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SWS3004-Lab Exercise 2</title>
+    <url>/2023/07/28/SWS-3004/AWS-Lab2/</url>
+    <content><![CDATA[<p>This Lab is about Hadoop and Spark, using AWS EMR and S3.</p>
+<span id="more"></span>
+<h1 id="exercise-2.1">Exercise 2.1</h1>
+<blockquote>
+<p>Run and compare the execution time of WordCount on Wikipidia’s dump
+with both Hadoop MapReduce and Spark. You can use either IaaS or PaaS,
+but make sure you use the same type of setup for both Hadoop and Spark
+(e.g., if you use EMR for Hadoop MapReduce, then use EMR for Spark
+also). You have to use the provided input of size 12 GB. Is there any
+difference in the programming model and ease of programming? Is there
+any difference in performance? Please explain it in maximum 3
+paragraphs. You can include up to 2 performance plots.</p>
+<p>Input dataset address on AWS S3:
+s3://sws3004-2023/input/enwiki-12GB.xml</p>
+<p>You must use this input dataset for both Hadoop MapReduce and
+Spark.</p>
+<p>(Tip: use the entire address s3://sws3004-2023/input/enwiki-12GB.xml
+as parameter to your MapReduce job)</p>
+</blockquote>
+<h3 id="part-1.-hadoop-mapreduce">Part 1. Hadoop Mapreduce</h3>
+<p>First I create a S3 bucket and upload files:</p>
+<p><img src="/images/sws3004-lab2/722-1.png" alt="S3 bucket"></p>
+<p>Then I create an EMR cluster, select the S3 bucket created in the
+previous step as my S3 folder, and select m4.large and default 3
+instances as the instance configuration.</p>
+<p><img src="/images/sws3004-lab2/722-3.png" alt="EMR"></p>
+<p>Now add a step, using <code>WordCount.jar</code> to process the input
+from <code>s3://sws3004-2023/input/enwiki-12GB.xml</code>.</p>
+<p><img src="/images/sws3004-lab2/722-6.png" alt="EMR Step"></p>
+<p>In my S3 bucket, I can check the output when the step finished.</p>
+<p><img src="/images/sws3004-lab2/722-9.png" alt="Check the Output"></p>
+<p><strong>Hadoop MapReduce performance:</strong> The process takes 42
+minutes totally.</p>
+<p><img src="/images/sws3004-lab2/722-8.png" alt="Hadoop MapReduce Performance"></p>
+<h3 id="part-2.-spark">Part 2. Spark</h3>
+<p>I clear the S3 bucket and upload the files of Spark:</p>
+<p><img src="/images/sws3004-lab2/722-17.png" alt="Spark"></p>
+<p>Then create a new EMR for Spark, and add a step.</p>
+<p><img src="/images/sws3004-lab2/722-18.png" alt="EMR Step"></p>
+<p><strong>Spark performance:</strong> The process takes 16 minutes
+totally.</p>
+<p><strong>It seems that Spark is better than Hadoop in performance.
+</strong> The reason is Hadoop uses disk to store data while Spark uses
+memory to store data, which can reduce the I/O time. Also, MapReduce
+requires a lot of time to sort during Shuffle, and sorting seems
+inevitable in MapReduce's Shuffle. When Spark is in Shuffle, sorting is
+only required for some situations, which is faster.</p>
+<h3 id="is-there-any-difference-in-the-programming-model-and-ease-of-programming">Is
+there any difference in the programming model and ease of
+programming?</h3>
+<p><strong>Hadoop MapReduce:</strong> Hadoop MapReduce is a programming
+model designed for distributed data processing on large clusters of
+commodity hardware. The MapReduce programming model has two steps to
+process our data: Map and Reduce.</p>
+<ul>
+<li><strong>Map:</strong> In the Map phase, the input data is divided
+into splits, and each split is processed independently by multiple
+mapper tasks in parallel. The mapper tasks extract key-value pairs from
+the input data and emit intermediate key-value pairs.</li>
+<li><strong>Shuffle and Sort:</strong> The intermediate key-value pairs
+emitted by the mappers are shuffled and sorted based on the keys. This
+step ensures that all values for the same key are grouped together and
+sent to the same reducer task.</li>
+<li><strong>Reduce:</strong> In the Reduce phase, the sorted and
+shuffled intermediate data is processed by reducer tasks. Each reducer
+task processes a subset of the intermediate data, grouped by keys. The
+reducer tasks aggregate the values associated with each key and produce
+the final output.</li>
+</ul>
+<p><strong>Spark:</strong> <strong>Spark is a better distributed data
+processing engine</strong>, which extends the MapReduce model and offers
+more versatility and performance improvements. Spark introduces the
+concept of Resilient Distributed Datasets (RDDs), which are the
+fundamental data abstraction in Spark. RDDs are distributed collections
+of data that can be processed in parallel.</p>
+<p>Spark provides a more general programming model compared to Hadoop
+MapReduce. It supports not only Map and Reduce operations but also
+various other transformations and actions on RDDs, such as filter, join,
+groupByKey, reduceByKey and so on. Additionally, Spark offers
+specialized libraries like Spark SQL for structured data processing,
+Spark Streaming for real-time data streaming, and MLlib for machine
+learning tasks.</p>
+<p><strong>Difference in Programming Model and Ease of
+Programming:</strong></p>
+<p>I found a comparison form in Lecture slides:</p>
+<p><img src="/images/sws3004-lab2/722-7.jpg" alt="Comparision"></p>
+<ol type="1">
+<li><strong>Programming Model:</strong>
+<ul>
+<li>Hadoop MapReduce has a more rigid programming model, where data is
+processed in two distinct phases (Map and Reduce), and users need to
+explicitly handle intermediate data shuffle and sort.</li>
+<li>Spark provides a more flexible and expressive programming model with
+RDDs, allowing users to perform complex operations on distributed data
+through a wide range of transformations and actions.</li>
+</ul></li>
+<li><strong>Ease of Programming:</strong>
+<ul>
+<li>Spark generally offers better ease of programming due to its
+high-level APIs and expressive transformations and actions on RDDs. It
+simplifies the development of distributed data processing applications,
+and its concise syntax often leads to shorter and more readable code
+compared to Hadoop MapReduce.</li>
+<li>Hadoop MapReduce, being more low-level, might require developers to
+write additional code for tasks like intermediate data serialization and
+deserialization, which can make the development process more
+cumbersome.</li>
+</ul></li>
+</ol>
+<p>In summary, Spark provides a more powerful and user-friendly
+programming model compared to Hadoop MapReduce. Spark's RDDs and
+higher-level APIs make it easier for developers to write distributed
+data processing applications, leading to faster development cycles and
+more efficient data processing.</p>
+<h1 id="exercise-2.2">Exercise 2.2</h1>
+<blockquote>
+<p>Write and run on AWS EMR a MapReduce program that computes the total
+number of followers and followees for each user in a Twitter dataset.
+The dataset is provided to you in the file <em>twitter_combined.txt</em>
+taken from http://snap.stanford.edu/data/egonets-Twitter.html. Each line
+of this file contains two user ids A and B meaning “<em>User A follows
+User B</em>”. For example, the first line is “214328887 34428380” and it
+means that “User 214328887 follows User 34428380”.</p>
+</blockquote>
+<p>My code is below:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// here is the map</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Map</span> <span class="keyword">extends</span> <span class="title class_">Mapper</span>&lt;LongWritable, Text, Text, IntWritable&gt; {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">map</span><span class="params">(LongWritable key, Text texts, Context context)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, InterruptedException {</span><br><span class="line">        String[] users = texts.toString().split(<span class="string">" "</span>); <span class="comment">// split as user0 user1</span></span><br><span class="line">        <span class="type">IntWritable</span> <span class="variable">followers</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntWritable</span>(-<span class="number">1</span>); <span class="comment">// negative</span></span><br><span class="line">        <span class="type">IntWritable</span> <span class="variable">follows</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntWritable</span>(<span class="number">1</span>); <span class="comment">// positive</span></span><br><span class="line">        context.write(<span class="keyword">new</span> <span class="title class_">Text</span>(users[<span class="number">1</span>]), followers);</span><br><span class="line">        context.write(<span class="keyword">new</span> <span class="title class_">Text</span>(users[<span class="number">0</span>]), follows);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// here is the reduce</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Reduce</span> <span class="keyword">extends</span> <span class="title class_">Reducer</span>&lt;Text, IntWritable, Text, Text&gt; {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">reduce</span><span class="params">(Text texts, Iterable&lt;IntWritable&gt; values, Context context)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, InterruptedException {</span><br><span class="line">        <span class="type">int</span> <span class="variable">follows</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">followers</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (IntWritable text : texts) {</span><br><span class="line">            <span class="keyword">if</span> (text.get() &gt; <span class="number">0</span>) {</span><br><span class="line">                follows += text.get();</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                followers -= text.get();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// output the result for each user</span></span><br><span class="line">        context.write(texts, <span class="keyword">new</span> <span class="title class_">Text</span>(String.format(<span class="string">"Followers %d"</span>, inDegree)));</span><br><span class="line">        context.write(texts, <span class="keyword">new</span> <span class="title class_">Text</span>(String.format(<span class="string">"Follows %d"</span>, outDegree)));</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>Then we create a S3 and upload the files:</p>
+<p><img src="/images/sws3004-lab2/722-13.png" alt="S3"></p>
+<p>Now we can add a step in EMR and view the final output:</p>
+<p><img src="/images/sws3004-lab2/722-15.png" alt="Step"></p>
+<p><img src="/images/sws3004-lab2/722-16.png" alt="Result"></p>
+<p>So User 214328887 has 628 followers, and follows 951 users.</p>
+]]></content>
+      <categories>
+        <category>云开发</category>
+      </categories>
+      <tags>
+        <tag>Cloud</tag>
+        <tag>Lab</tag>
       </tags>
   </entry>
   <entry>
@@ -958,26 +958,6 @@ GroupBy)</p></li>
       </tags>
   </entry>
   <entry>
-    <title>惜别</title>
-    <url>/2023/09/05/wanderer/2023-09-05-%E6%83%9C%E5%88%AB/</url>
-    <content><![CDATA[<p>为北邮计语融媒体中心平台运营部做的最后一件事（也可能是倒数第二件）。</p>
-<span id="more"></span>
-<p>今天效率很低，上午帮 Ayu
-水了四千字的稿，下午看着数据库与编译原理发呆。</p>
-<p>昨晚帮新一届的部长导预览的时候，突然意识到他们对公众号后台的了解聊胜于无，于是想着抽时间出一版文字教程或是腾讯会议教学。之前这项工作应该是由主席们完成，但是计语的老部长们全走了，还负责发布任务的那位对后台了解甚少。点击预览，默认发送给的微信号只有孤零零的我一个。感觉有点对不起琳姐、磊哥还有翁哥，但人生的岔路口又有几个能让自己选择呢。</p>
-<p>过去一年时常有背负着计语前行的感觉，尽管管理相对混乱，任务永远繁重。计语对我而言像是一个家，又像是自己的孩子，已经分不清对它是一种责任还是感情。排版这种前端工作有着数不清的细节，我很怕还有事情没有交代清楚，后来者会继续犯一样的错。</p>
-<p>问了老师新任部长团的名单，后知后觉发现早已选好但我不在群里，突然想到还在未来时的两个计划书，不免惘然。培训会开的很仓促，但后台工作也没有那么多东西可说，新任的部长们只有一个比较熟悉。最后把一切可能有用的资源发给孩子们，不过回应寥寥。我觉得做好自己该做的就很满意了，少来点自己是诸葛丞相的幻想。相信后人的智慧与创造。</p>
-<p>我他妈的真想回到 2021，那个寒冷而晴朗的冬天。</p>
-<p>最后一次为这件事伤感情吧，悲观者也许正确，乐观者永远前行。</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>惜别</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SWS3004-Lecture 4: Cloud Software Development and Deployment</title>
     <url>/2023/08/10/SWS-3004/SWS3004-Lecture-4/</url>
     <content><![CDATA[<p>L4 is about Cloud Software Development and Deployment.</p>
@@ -1117,20 +1097,6 @@ more complex software applications</p></li>
       </tags>
   </entry>
   <entry>
-    <title>碎页城</title>
-    <url>/2024/04/14/wanderer/2024-04-14-%E7%A2%8E%E5%8F%B6%E5%9F%8E/</url>
-    <content><![CDATA[<p>记录一些碎片，试着写</p>
-<span id="more"></span>
-<script src="https://gist.github.com/AryCra07/1fc32002c0b9c9185d0ad2e242c5c917.js"></script>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>碎片</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>虎符前端工程实践2</title>
     <url>/2023/06/09/hufu/%E8%99%8E%E7%AC%A6%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B52/</url>
     <content><![CDATA[<ul>
@@ -1150,50 +1116,6 @@ more complex software applications</p></li>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item-warn-board"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row_spacing"</span> <span class="attr">v-if</span>=<span class="string">"AlertList.length &gt; 0"</span> <span class="attr">v-for</span>=<span class="string">"i in 5"</span> <span class="attr">style</span>=<span class="string">"text-align: left;margin-bottom: 10px"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"bullet"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    {{ truncateText(AlertList[i].annotations.summary, 47) }}</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>这样，我们便成功地实现限制文本长度的功能：</p>
 <p><img src="/images/2023-6-9-2.png"></p>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-        <tag>虎符</tag>
-        <tag>VUE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>虎符前端工程实践3</title>
-    <url>/2023/09/01/hufu/%E8%99%8E%E7%AC%A6%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B53/</url>
-    <content><![CDATA[<ul>
-<li>下拉框</li>
-</ul>
-<span id="more"></span>
-<div style="text-align: center;">
-<p><img src="/images/hufu3/1.png" alt="figure 1" style="width: 80%; height: 80%; display: block; margin: 0 auto;"></p>
-</div>
-<ul>
-<li><p>删除顶部命名空间的显示</p>
-<p>将
-<code>&lt;span class="base"&gt;{{ $t('namespace') }}：{{ projectDetail.namespace }}&lt;/span&gt;&lt;br&gt;</code>
-替换成 <code>&lt;br&gt;</code></p></li>
-<li><p>命名空间下拉框</p>
-<p>仿照 <code>newContainer/index.vue</code> 部分代码实现下拉框</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">...</span><br><span class="line">    &lt;el-form-item :label=<span class="string">"$t('namespace')"</span> prop=<span class="string">"namespace"</span>&gt;</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">el-select</span> <span class="attr">v-model</span>=<span class="string">"ruleForm.namespace"</span> <span class="attr">:placeholder</span>=<span class="string">"$t('please')+$t('choose')+$t('namespace')"</span> <span class="attr">style</span>=<span class="string">"width: 100%"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-option</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">v-for</span>=<span class="string">"ns in namespaceOptions"</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">:label</span>=<span class="string">"ns"</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">:value</span>=<span class="string">"ns"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-option</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">el-select</span>&gt;</span></span></span><br><span class="line">    &lt;/el-form-item&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">methods</span>: {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="title function_">fetchData</span>(<span class="params"></span>) {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">             <span class="title function_">getNSList</span>().<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">this</span>.<span class="property">namespaceOptions</span> = response.<span class="property">data</span>.<span class="property">nsList</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      })</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></li>
-<li><p>国际化</p>
-<p>采用 <code>$t('namespace')</code>，通过 <code>Vue I18n</code>
-库实现国际化</p></li>
-<li><p>修改应用命名空间的时候，不显示“default”(同时”应用管理/容器应用/新建容器”页面的下拉框也不显示“default”，即<strong>两个页面都要做此操作</strong>)</p>
-<p><code>namespaceOptions</code> 是通过 <code>getNSList()</code>
-获取数据的，后端是在 <code>ResouceController</code> 的
-<code>getNamespaces</code> 继续调数据的，所以从根源上去掉
-<code>default</code> 好像不太现实。前端有两种办法</p>
-<ul>
-<li><code>v-if="ns !== 'default'</code>，在下拉列表的时候去掉</li>
-<li><code>this.namespaceOptions = response.data.nsList.filter(ns =&gt; ns !== 'default')</code>
-在请求列表数据后筛掉，我采取这个办法</li>
-</ul></li>
-<li><p>只有在容器在”<strong>STOP</strong>”状态允许更改命名空间</p>
-<p>加入 <code>:disabled="projectStatus!=='STOP' "</code></p></li>
-</ul>
 ]]></content>
       <categories>
         <category>前端</category>
@@ -1285,6 +1207,116 @@ axisPointer。
         <tag>虎符</tag>
         <tag>VUE</tag>
         <tag>echarts</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>虎符前端工程实践3</title>
+    <url>/2023/09/01/hufu/%E8%99%8E%E7%AC%A6%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B53/</url>
+    <content><![CDATA[<ul>
+<li>下拉框</li>
+</ul>
+<span id="more"></span>
+<div style="text-align: center;">
+<p><img src="/images/hufu3/1.png" alt="figure 1" style="width: 80%; height: 80%; display: block; margin: 0 auto;"></p>
+</div>
+<ul>
+<li><p>删除顶部命名空间的显示</p>
+<p>将
+<code>&lt;span class="base"&gt;{{ $t('namespace') }}：{{ projectDetail.namespace }}&lt;/span&gt;&lt;br&gt;</code>
+替换成 <code>&lt;br&gt;</code></p></li>
+<li><p>命名空间下拉框</p>
+<p>仿照 <code>newContainer/index.vue</code> 部分代码实现下拉框</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">...</span><br><span class="line">    &lt;el-form-item :label=<span class="string">"$t('namespace')"</span> prop=<span class="string">"namespace"</span>&gt;</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">el-select</span> <span class="attr">v-model</span>=<span class="string">"ruleForm.namespace"</span> <span class="attr">:placeholder</span>=<span class="string">"$t('please')+$t('choose')+$t('namespace')"</span> <span class="attr">style</span>=<span class="string">"width: 100%"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-option</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">v-for</span>=<span class="string">"ns in namespaceOptions"</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">:label</span>=<span class="string">"ns"</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">:value</span>=<span class="string">"ns"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-option</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">el-select</span>&gt;</span></span></span><br><span class="line">    &lt;/el-form-item&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">methods</span>: {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="title function_">fetchData</span>(<span class="params"></span>) {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">             <span class="title function_">getNSList</span>().<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">this</span>.<span class="property">namespaceOptions</span> = response.<span class="property">data</span>.<span class="property">nsList</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      })</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></li>
+<li><p>国际化</p>
+<p>采用 <code>$t('namespace')</code>，通过 <code>Vue I18n</code>
+库实现国际化</p></li>
+<li><p>修改应用命名空间的时候，不显示“default”(同时”应用管理/容器应用/新建容器”页面的下拉框也不显示“default”，即<strong>两个页面都要做此操作</strong>)</p>
+<p><code>namespaceOptions</code> 是通过 <code>getNSList()</code>
+获取数据的，后端是在 <code>ResouceController</code> 的
+<code>getNamespaces</code> 继续调数据的，所以从根源上去掉
+<code>default</code> 好像不太现实。前端有两种办法</p>
+<ul>
+<li><code>v-if="ns !== 'default'</code>，在下拉列表的时候去掉</li>
+<li><code>this.namespaceOptions = response.data.nsList.filter(ns =&gt; ns !== 'default')</code>
+在请求列表数据后筛掉，我采取这个办法</li>
+</ul></li>
+<li><p>只有在容器在”<strong>STOP</strong>”状态允许更改命名空间</p>
+<p>加入 <code>:disabled="projectStatus!=='STOP' "</code></p></li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>虎符</tag>
+        <tag>VUE</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>碎页城</title>
+    <url>/2024/04/14/wanderer/2024-04-14-%E7%A2%8E%E5%8F%B6%E5%9F%8E/</url>
+    <content><![CDATA[<p>记录一些碎片</p>
+<span id="more"></span>
+<script src="https://gist.github.com/AryCra07/1fc32002c0b9c9185d0ad2e242c5c917.js"></script>
+<style>
+    .gist-meta {
+        display: none;
+    }
+    div.gist-meta::after {
+        content: "yu still";
+        font-style: italic;
+        visibility: visible;
+    }
+    .gist .markdown-body {
+        font-size: 15.4px;
+    }
+</style>
+<script>
+    var divs = document.querySelectorAll('.gist-meta');
+    divs.forEach(function(div) {
+        for (var i = 0; i < div.childNodes.length; i++) {
+            var node = div.childNodes[i];
+            if (node.nodeType === Node.TEXT_NODE) {
+                node.nodeValue = node.nodeValue.replace('hosted with ❤ by', '❤ A-');
+            } else if (node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'A') {
+                 /*if (node.textContent.includes('.')) {
+                   node.textContent = '';
+                 } else {
+                     node.textContent = node.textContent.replace('GitHub', '');
+                     node.textContent = node.textContent.replace('view raw', '');
+                 }*/
+                node.textContent = '';
+            }
+        }
+    });
+</script>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>碎片</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>惜别</title>
+    <url>/2023/09/05/wanderer/2023-09-05-%E6%83%9C%E5%88%AB/</url>
+    <content><![CDATA[<p>为北邮计语融媒体中心平台运营部做的最后一件事（也可能是倒数第二件）。</p>
+<span id="more"></span>
+<p>今天效率很低，上午帮 Ayu
+水了四千字的稿，下午看着数据库与编译原理发呆。</p>
+<p>昨晚帮新一届的部长导预览的时候，突然意识到他们对公众号后台的了解聊胜于无，于是想着抽时间出一版文字教程或是腾讯会议教学。之前这项工作应该是由主席们完成，但是计语的老部长们全走了，还负责发布任务的那位对后台了解甚少。点击预览，默认发送给的微信号只有孤零零的我一个。感觉有点对不起琳姐、磊哥还有翁哥，但人生的岔路口又有几个能让自己选择呢。</p>
+<p>过去一年时常有背负着计语前行的感觉，尽管管理相对混乱，任务永远繁重。计语对我而言像是一个家，又像是自己的孩子，已经分不清对它是一种责任还是感情。排版这种前端工作有着数不清的细节，我很怕还有事情没有交代清楚，后来者会继续犯一样的错。</p>
+<p>问了老师新任部长团的名单，后知后觉发现早已选好但我不在群里，突然想到还在未来时的两个计划书，不免惘然。培训会开的很仓促，但后台工作也没有那么多东西可说，新任的部长们只有一个比较熟悉。最后把一切可能有用的资源发给孩子们，不过回应寥寥。我觉得做好自己该做的就很满意了，少来点自己是诸葛丞相的幻想。相信后人的智慧与创造。</p>
+<p>我他妈的真想回到 2021，那个寒冷而晴朗的冬天。</p>
+<p>最后一次为这件事伤感情吧，悲观者也许正确，乐观者永远前行。</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>惜别</tag>
       </tags>
   </entry>
 </search>
