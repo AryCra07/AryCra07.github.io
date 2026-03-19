@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Distributionally robust optimization scheduling model for electric power and computing power coordination considering spatiotemporal response - AryCra07&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="AryCra07"><meta name="msapplication-TileImage" content="/images/icon1.jpg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="AryCra07"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="论文笔记 - 分布式鲁棒优化调度模型：考虑时空响应的电算协同 这篇论文的核心目标，是把数据中心中的计算任务建模为一种可以进行时间平移与空间迁移的柔性负荷，并在风电、光伏、计算任务三类不确定性同时存在的情况下，构建一个数据驱动的两阶段分布鲁棒优化调度模型，用于实现电力系统与算力系统的协同调度。"><meta property="og:type" content="blog"><meta property="og:title" content="Distributionally robust optimization scheduling model for electric power and computing power coordination considering spatiotemporal response"><meta property="og:url" content="http://example.com/study/2025_Fan_DROS_DRO/"><meta property="og:site_name" content="AryCra07&#039;s Blog"><meta property="og:description" content="论文笔记 - 分布式鲁棒优化调度模型：考虑时空响应的电算协同 这篇论文的核心目标，是把数据中心中的计算任务建模为一种可以进行时间平移与空间迁移的柔性负荷，并在风电、光伏、计算任务三类不确定性同时存在的情况下，构建一个数据驱动的两阶段分布鲁棒优化调度模型，用于实现电力系统与算力系统的协同调度。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://example.com/img/og_image.png"><meta property="article:published_time" content="2026-03-10T04:38:40.463Z"><meta property="article:modified_time" content="2026-03-17T06:48:06.818Z"><meta property="article:author" content="AryCra_07"><meta property="article:tag" content="算网调度"><meta property="article:tag" content="电算协同"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://example.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/study/2025_Fan_DROS_DRO/"},"headline":"Distributionally robust optimization scheduling model for electric power and computing power coordination considering spatiotemporal response","image":["http://example.com/img/og_image.png"],"datePublished":"2026-03-10T04:38:40.463Z","dateModified":"2026-03-17T06:48:06.818Z","author":{"@type":"Person","name":"AryCra_07"},"publisher":{"@type":"Organization","name":"AryCra07's Blog","logo":{"@type":"ImageObject","url":"http://example.com/images/icon1.jpg"}},"description":"论文笔记 - 分布式鲁棒优化调度模型：考虑时空响应的电算协同 这篇论文的核心目标，是把数据中心中的计算任务建模为一种可以进行时间平移与空间迁移的柔性负荷，并在风电、光伏、计算任务三类不确定性同时存在的情况下，构建一个数据驱动的两阶段分布鲁棒优化调度模型，用于实现电力系统与算力系统的协同调度。"}</script><link rel="canonical" href="http://example.com/study/2025_Fan_DROS_DRO/"><link rel="icon" href="/images/icon1.jpg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/icon1.jpg" alt="AryCra07&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/study/">问山</a><a class="navbar-item" href="/tech/">筑塔</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2026-03-10T04:38:40.463Z" title="2026/3/10 12:38:40">2026-03-10</time>发表</span><span class="level-item"><time dateTime="2026-03-17T06:48:06.818Z" title="2026/3/17 14:48:06">2026-03-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a></span><span class="level-item">31 分钟读完 (大约4630个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">Distributionally robust optimization scheduling model for electric power and computing power coordination considering spatiotemporal response</h1><div class="content"><p>论文笔记 - 分布式鲁棒优化调度模型：考虑时空响应的电算协同</p>
+<p>这篇论文的核心目标，是把<strong>数据中心中的计算任务</strong>建模为一种可以进行<strong>时间平移</strong>与<strong>空间迁移</strong>的柔性负荷，并在风电、光伏、计算任务三类不确定性同时存在的情况下，构建一个<strong>数据驱动的两阶段分布鲁棒优化调度模型</strong>，用于实现电力系统与算力系统的协同调度。</p>
+<span id="more"></span>
+
+<h2 id="基本信息">基本信息</h2>
+<p><strong>题目</strong>：Distributionally robust optimization
+scheduling model for electric power and computing power coordination
+considering spatiotemporal response</p>
+<p><strong>期刊</strong>：Applied Energy</p>
+<p><strong>年份</strong>：2025</p>
+<p><strong>作者</strong>：Wei Fan, Ying Fan, Pengju Liu, Yue Wang, Fan
+Tong, Bowen Yi, Xing Yao</p>
+<p><strong>核心关键词</strong>：电力-算力协同、时空响应、分布鲁棒优化（DRO）、Copula、WGAN-GP、C&amp;CG</p>
+<h2 id="背景与问题">背景与问题</h2>
+<h3 id="背景">背景</h3>
+<p>论文指出，数字经济快速发展带来了持续增长的算力能耗，这一趋势正在改变电力负荷结构，并加剧供需失衡；与此同时，东部地区算力需求高而新能源资源相对不足，西部地区新能源丰富而算力需求相对较低，电力与算力在空间上呈现显著错配。</p>
+<p>作者因此提出三个关键问题：</p>
+<ol type="1">
+<li><strong>“数据流”和“电力流”之间是什么关系；</strong></li>
+<li><strong>算力资源对电力系统到底有多大的调节潜力；</strong></li>
+<li><strong>在计算任务本身也存在随机性的情况下，如何进行稳健调度。</strong></li>
+</ol>
+<h3 id="核心矛盾">核心矛盾</h3>
+<p>这篇论文实际在解决一个典型的“<strong>源-荷-算协同</strong>”问题：</p>
+<ul>
+<li><strong>源侧</strong>：风光出力具有波动性和随机性；</li>
+<li><strong>荷侧</strong>：传统负荷可调能力有限；</li>
+<li><strong>算侧</strong>：数据中心负荷大，但其中一部分任务具有可延后、可迁移属性；</li>
+<li><strong>挑战</strong>：如何把这种“算力柔性”显式纳入电力系统调度框架。</li>
+</ul>
+<h2 id="论文的主要创新点">论文的主要创新点</h2>
+<p>作者在论文中明确给出三项贡献，可概括为以下三点：</p>
+<h3 id="构建了考虑时空响应的电力-算力协同调度模型">构建了考虑时空响应的电力-算力协同调度模型</h3>
+<p>该模型把数据中心纳入电力系统优化调度框架，并显式刻画了计算资源的<strong>时间响应</strong>与<strong>空间响应</strong>能力。</p>
+<h3 id="提出了更真实的不确定场景生成与改进-dro-方法">提出了更真实的不确定场景生成与改进
+DRO 方法</h3>
+<p>作者采用 <strong>Copula + WGAN-GP</strong>
+的混合场景生成方法来描述风光与计算任务的不确定性；同时引入<strong>加权
+Composite Norm</strong>，改进离散场景下的分布鲁棒优化模型。</p>
+<h3 id="从多维指标评估了算力资源对电力系统的调节价值">从多维指标评估了算力资源对电力系统的调节价值</h3>
+<p>作者设计了调节价值评估指标体系，并以<strong>山东-蒙西</strong>为经验案例分析算力对净负荷平滑、可再生能源消纳和供电压力缓解的作用。</p>
+<h2 id="论文整体技术路线">论文整体技术路线</h2>
+<p>根据论文结构，其研究逻辑可以概括为：</p>
+<ol type="1">
+<li>建立数据中心能耗模型，描述“任务量 → CPU利用率 → 服务器功耗 →
+数据中心总功耗”的映射；</li>
+<li>构建计算任务的时空响应模型，将任务分为不可调、可时间平移、可空间迁移三类；</li>
+<li>在电力系统与计算网络统一框架下建立协同优化调度模型；</li>
+<li>对风电、光伏、计算任务的不确定性生成场景；</li>
+<li>进一步构建两阶段 DRO 模型；</li>
+<li>用 C&amp;CG 算法求解；</li>
+<li>通过仿真与实证案例验证模型效果。</li>
+</ol>
+<h2 id="论文方法">论文方法</h2>
+<h3 id="数据中心能耗建模">数据中心能耗建模</h3>
+<p>作者认为，相较于按机架功率粗略估算数据中心能耗，更有意义的方式是从<strong>计算任务规模</strong>出发计算能耗，因为这样更有利于建立“算力-电力”映射关系。论文采用如下建模链路：</p>
+<ul>
+<li>数据中心总能耗与
+PUE、IT设备能耗比例、服务器数量、单服务器功耗有关；</li>
+<li>单服务器功耗由空闲功耗与峰值功耗之间按 CPU 利用率线性插值得到；</li>
+<li>CPU 利用率由单位时间任务数与服务器处理能力之比表示。</li>
+</ul>
+<p>这说明论文不是把数据中心视为固定电负荷，而是试图建立一个<strong>任务驱动的功耗模型</strong>。</p>
+<h3 id="计算任务分类">计算任务分类</h3>
+<p>论文依据数据时效性，把计算任务划分为：</p>
+<ul>
+<li><strong>热数据（hot data）</strong>：实时性要求高，通常不可调；</li>
+<li><strong>温数据（warm data）</strong>：可以迁移；</li>
+<li><strong>冷数据（cold data）</strong>：既可迁移，也可延后执行。</li>
+</ul>
+<p>进一步地，论文把计算任务抽象为三类：</p>
+<ul>
+<li><strong>FCT</strong>：固定计算任务；</li>
+<li><strong>TSCT</strong>：可时间平移任务；</li>
+<li><strong>STCT</strong>：可空间迁移任务。</li>
+</ul>
+<p>总任务量满足：</p>
+<p><span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.65ex;" xmlns="http://www.w3.org/2000/svg" width="40.204ex" height="2.195ex" role="img" focusable="false" viewBox="0 -683 17769.9 970.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="TeXAtom" transform="translate(836,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path></g><g data-mml-node="mi" transform="translate(760,0)"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mo" transform="translate(1464,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(1742,0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(2193,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(2471,0)"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g></g></g><g data-mml-node="mo" transform="translate(3166.3,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="msub" transform="translate(4222.1,0)"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="TeXAtom" transform="translate(836,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D439" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"></path></g><g data-mml-node="mi" transform="translate(749,0)"><path data-c="1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path></g><g data-mml-node="mi" transform="translate(1509,0)"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mo" transform="translate(2213,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(2491,0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(2942,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(3220,0)"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g></g></g><g data-mml-node="mo" transform="translate(7862.5,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="msub" transform="translate(8862.7,0)"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="TeXAtom" transform="translate(836,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mi" transform="translate(704,0)"><path data-c="1D446" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"></path></g><g data-mml-node="mi" transform="translate(1349,0)"><path data-c="1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path></g><g data-mml-node="mi" transform="translate(2109,0)"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mo" transform="translate(2813,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(3091,0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(3542,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(3820,0)"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g></g></g><g data-mml-node="mo" transform="translate(12927.3,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="msub" transform="translate(13927.5,0)"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="TeXAtom" transform="translate(836,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D446" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"></path></g><g data-mml-node="mi" transform="translate(645,0)"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mi" transform="translate(1349,0)"><path data-c="1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path></g><g data-mml-node="mi" transform="translate(2109,0)"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mo" transform="translate(2813,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(3091,0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(3542,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(3820,0)"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g></g></g></g></g></svg></mjx-container></span></p>
+<p>其含义是：某区域某时段最终需要处理的任务量，由三部分组成。</p>
+<h3 id="时间响应建模任务如何时间平移">时间响应建模：任务如何“时间平移”</h3>
+<p>这是论文的重要建模点。</p>
+<p>作者特别强调：<strong>计算任务不能像部分电负荷那样“提前消费”，只能向后推迟执行。</strong><br>
+也就是说，时间响应是<strong>单向的、后移的</strong>。</p>
+<p>论文对 TSCT 的建模思想是：</p>
+<ul>
+<li>先设定总任务中有一部分属于可平移任务；</li>
+<li>某时段的可平移任务可以转移到后续任一时段；</li>
+<li>但任一时段转出的总量不能超过该时段初始可平移任务量；</li>
+<li>最终各时段任务量通过“流入-流出平衡”来表示。</li>
+</ul>
+<p>这其实是把“任务延后执行”形式化为一种<strong>类似需求响应的时间重分配机制</strong>，但与传统需求响应的差异在于它只能“后移”，不能“前移”。</p>
+<h3 id="空间响应建模任务如何跨区域迁移">空间响应建模：任务如何“跨区域迁移”</h3>
+<p>论文还建模了任务在不同区域数据中心之间的迁移能力。</p>
+<p>作者的关键假设包括：</p>
+<ul>
+<li>光纤传输损耗可以忽略；</li>
+<li>空间迁移的时延在该建模尺度下可忽略；</li>
+<li>各区域时钟同步；</li>
+<li>某区域某时刻最终任务量由“迁入任务 - 迁出任务”共同决定。</li>
+</ul>
+<p>因此，STCT
+的本质是<strong>把任务从算力紧张、电力紧张的区域迁移到新能源充足、算力相对富余的区域处理</strong>。</p>
+<p>这个空间模型更接近“广域算力重分布”，其目标不是通信优化本身，而是利用跨区域算力转移来实现<strong>电力供需再平衡</strong>与<strong>新能源消纳提升</strong>。</p>
+<h2 id="协同优化模型目标函数和约束">协同优化模型：目标函数和约束</h2>
+<h3 id="目标函数">目标函数</h3>
+<p>论文构建的是一个综合成本最小化模型，总成本包括：</p>
+<ul>
+<li>火电燃料成本；</li>
+<li>机组启停成本；</li>
+<li>碳排放成本；</li>
+<li>弃风弃光惩罚成本；</li>
+<li>输电成本；</li>
+<li>失负荷惩罚成本；</li>
+<li>时间平移任务补偿成本；</li>
+<li>空间迁移任务传输成本。</li>
+</ul>
+<p>这不是结合“最小碳排”和“最低成本”模型的一个兼顾：</p>
+<ul>
+<li>电力系统经济性，</li>
+<li>电力系统安全性，</li>
+<li>可再生能源消纳，</li>
+<li>算力侧灵活调节代价</li>
+</ul>
+<p>的综合调度模型。</p>
+<h3 id="主要约束">主要约束</h3>
+<p>论文包含的核心约束包括：</p>
+<ul>
+<li>电力平衡约束；</li>
+<li>机组运行约束；</li>
+<li>储能约束；</li>
+<li>输电约束；</li>
+<li>CPU 利用率约束；</li>
+<li>时间平移任务约束；</li>
+<li>空间迁移任务约束。</li>
+</ul>
+<p>论文把“电网、储能、输电、数据中心任务流”放在了一个统一框架里，这正是其“电力-算力协同”的核心。</p>
+<h2 id="不确定性处理为什么要用-dro">不确定性处理：为什么要用 DRO</h2>
+<h3 id="不确定来源">不确定来源</h3>
+<p>论文同时考虑三类不确定性：</p>
+<ol type="1">
+<li>风电出力不确定；</li>
+<li>光伏出力不确定；</li>
+<li>计算任务到达量不确定。</li>
+</ol>
+<p>相比很多只关注风光波动的论文，这篇文章将“<strong>任务需求波动</strong>”也作为关键不确定性纳入模型，这是它很重要的一个优点。</p>
+<h3 id="场景生成方法">场景生成方法</h3>
+<p>作者采用混合方法生成不确定场景：</p>
+<p><strong>风电与光伏：Copula</strong></p>
+<p>Copula
+用于保留风光之间的相关性。这说明作者并不是简单独立抽样，而是考虑了不同新能源出力之间的统计依赖关系。</p>
+<p><strong>计算任务：WGAN-GP</strong></p>
+<p>WGAN-GP 用于生成更真实的计算任务场景。
+其目的在于避免人为假定任务分布，而是利用数据驱动方式去学习历史任务样本分布。</p>
+<p>作者想表达的是，**如果不确定场景本身生成得不真实，那么后面的优化再复杂也没有意义。**因此，场景生成是这篇论文很关键的一环。</p>
+<h3 id="为什么不是随机优化或鲁棒优化">为什么不是随机优化或鲁棒优化</h3>
+<p>论文对三类方法的态度很明确：</p>
+<ul>
+<li><strong>SO（随机优化）</strong>：偏经济，但依赖分布假设；</li>
+<li><strong>RO（鲁棒优化）</strong>：偏安全，但容易过于保守；</li>
+<li><strong>DRO（分布鲁棒优化）</strong>：在两者之间取平衡。</li>
+</ul>
+<p>作者最终采用的是<strong>两阶段分布鲁棒优化</strong>模型。</p>
+<h2 id="改进-dro-的关键点">改进 DRO 的关键点</h2>
+<p>这篇论文不是直接套用经典 DRO，而是做了改进。</p>
+<h3 id="经典问题">经典问题</h3>
+<p>传统离散场景 DRO 中，在 Composite Norm
+约束下，不同场景相对原始概率的偏离幅度往往被设定得一致。作者认为这不符合实际，因为：</p>
+<ul>
+<li>原本概率高的场景，应允许更大的概率波动；</li>
+<li>原本概率低的场景，其偏离空间应更小。</li>
+</ul>
+<h3 id="改进方式">改进方式</h3>
+<p>作者引入了<strong>加权 Composite
+Norm</strong>，使不同场景的分布偏离空间按原始概率加权。</p>
+<p>这样做提升了模型的：可操作性、灵活性以及与真实场景的一致性。</p>
+<p>这个改动本质上是在说：“不是所有不确定场景都应该一视同仁地悲观对待。”</p>
+<h2 id="求解方法ccg-算法">求解方法：C&amp;CG 算法</h2>
+<p>论文使用 <strong>Column-and-Constraint
+Generation（C&amp;CG）</strong> 算法求解两阶段 DRO 模型。</p>
+<h3 id="基本思路">基本思路</h3>
+<ul>
+<li>主问题（MP）先给出一组决策；</li>
+<li>子问题（SP）在 ambiguity set 中寻找最坏概率分布；</li>
+<li>再将最坏场景或约束不断加入主问题；</li>
+<li>迭代直到上下界收敛。</li>
+</ul>
+<p>由于 DRO 本身是“决策 +
+最坏分布”的双层嵌套问题，直接求解很困难。C&amp;CG
+的作用就是把这种复杂嵌套问题拆开迭代求解。</p>
+<h2 id="实验设计">实验设计</h2>
+<h3 id="仿真场景设置">仿真场景设置</h3>
+<p>论文先做两区域仿真：</p>
+<ul>
+<li><strong>R1</strong>：东部区域，电力负荷和算力需求高，但新能源装机较低；</li>
+<li><strong>R2</strong>：西部区域，新能源丰富，但算力需求和电力负荷较低。</li>
+</ul>
+<p>仿真时间尺度为：</p>
+<ul>
+<li><strong>1 小时</strong>一个时间步长；</li>
+<li>研究一个典型日。</li>
+</ul>
+<p>数据中心参数包括：</p>
+<ul>
+<li>PUE = 2；</li>
+<li>服务器 IT 能耗占比 80%；</li>
+<li>每个区域 80 万台服务器；</li>
+<li>每台服务器可处理 500 tasks/s；</li>
+<li>空闲功耗 100W，峰值功耗 300W；</li>
+<li>时间可平移任务比例与空间可迁移任务比例均为 20%。</li>
+</ul>
+<h3 id="评价指标">评价指标</h3>
+<p>论文用于评估算力调节价值的指标包括弃风弃光量、失负荷量、净负荷标准差和运行成本。分别对应：</p>
+<ul>
+<li><strong>弃风弃光量</strong>：反映新能源消纳能力；</li>
+<li><strong>失负荷量</strong>：反映供电可靠性；</li>
+<li><strong>净负荷标准差</strong>：反映调度难度与负荷平滑程度；</li>
+<li><strong>运行成本</strong>：反映经济性。</li>
+</ul>
+<h3 id="场景对比设计">场景对比设计</h3>
+<p>从结果描述可知，论文设计了以下几类场景：</p>
+<ul>
+<li><strong>S1</strong>：资源不能进行空间最优分配；</li>
+<li><strong>S2</strong>：加入输电能力；</li>
+<li><strong>S3-S5</strong>：逐步考虑计算任务的时空调节能力；</li>
+<li><strong>S6-S8</strong>：比较 SO、RO、DRO 等不确定优化方法。</li>
+</ul>
+<hr>
+<h2 id="主要实验结果">主要实验结果</h2>
+<h3 id="时空调节确实有效">时空调节确实有效</h3>
+<p>论文显示，相较于 S1：</p>
+<ul>
+<li>S2 成本降低 <strong>1.38%</strong>；</li>
+<li>S3、S4、S5 在逐步考虑计算任务时空调节后，成本分别降低 <strong>1.441%
+/ 1.598% / 1.661%</strong>。</li>
+</ul>
+<p>说明两件事：</p>
+<ol type="1">
+<li>输电本身就能改善资源错配；</li>
+<li>在输电基础上进一步引入算力的时间平移和空间迁移，可以继续降低系统成本。</li>
+</ol>
+<h3 id="算力时空调节能够平滑净负荷曲线">算力时空调节能够平滑净负荷曲线</h3>
+<p>论文结论指出，计算任务的时空调节可以：</p>
+<ul>
+<li>平滑净负荷曲线；</li>
+<li>缓解高峰供电压力；</li>
+<li>提升新能源消纳能力。</li>
+</ul>
+<p>这说明数据中心不只是“耗电大户”，也可以被重新理解为一种<strong>柔性调节资源</strong>。</p>
+<h3 id="dro-在经济性与稳健性之间更平衡">DRO
+在经济性与稳健性之间更平衡</h3>
+<p>论文对 S6-S8 的评价是：</p>
+<ul>
+<li>S6：基于期望值，偏激进；</li>
+<li>S7：基于最坏情形，偏保守；</li>
+<li>S8：DRO 得到中间值，更合理。</li>
+</ul>
+<p>这正是 DRO 的价值所在，既不盲目乐观，也不过度悲观。</p>
+<hr>
+<h3 id="样本越多dro-越不保守">样本越多，DRO 越不保守</h3>
+<p>作者指出：</p>
+<ul>
+<li>历史样本少时，DRO 更接近鲁棒优化；</li>
+<li>历史样本多时，DRO 更接近随机优化；</li>
+<li>当样本数达到 <strong>400</strong> 时，保守性得到较好控制。</li>
+</ul>
+<p>这说明该模型具有较好的“<strong>数据自适应性</strong>”，数据少时更谨慎，数据多时更敢于利用统计规律。</p>
+<h3 id="置信水平越高决策越保守">置信水平越高，决策越保守</h3>
+<p>论文进一步分析了置信水平对成本的影响：</p>
+<ul>
+<li>当 1-norm 和 ∞-norm 的置信水平提高时，</li>
+<li>不确定分布的允许偏离范围更大，</li>
+<li>模型会考虑更差的情形，</li>
+<li>因而运行成本上升、决策更保守。</li>
+</ul>
+<p>这相当于给管理者一个“风险旋钮”：</p>
+<ul>
+<li>风险厌恶更强 → 置信水平更高 → 成本更高但更安全；</li>
+<li>风险容忍更强 → 置信水平更低 → 成本更低但更激进。</li>
+</ul>
+<h2 id="13-实证案例山东蒙西">13. 实证案例：山东—蒙西</h2>
+<p>论文实证案例选择了：</p>
+<ul>
+<li><strong>山东（SD）</strong>：电力需求高、算力需求高；</li>
+<li><strong>西部内蒙古（WIM）</strong>：新能源资源和算力资源更丰富。</li>
+</ul>
+<p>案例中关键参数包括：</p>
+<ul>
+<li>山东 800 万台服务器；</li>
+<li>蒙西 400 万台服务器；</li>
+<li>每台服务器 500 tasks/s；</li>
+<li>空闲功耗 100W，峰值功耗 300W。</li>
+</ul>
+<p>作者指出，经验案例与仿真结果基本一致。</p>
+<p>这个案例实际上在模拟“<strong>东部负荷中心 +
+西部新能源基地</strong>”的典型中国场景，因此与“东数西算”“西电东送”等国家战略背景有较强契合性。</p>
+<h2 id="论文局限性">论文局限性</h2>
+<h3 id="时间尺度较粗">时间尺度较粗</h3>
+<p>论文采用的是<strong>小时级</strong>调度。<br>
+这更适合日内/日前优化，不直接适用于你们所关注的毫秒级响应装置场景。</p>
+<h3 id="任务粒度较粗">任务粒度较粗</h3>
+<p>任务被抽象为数量流，没有进一步下钻到：</p>
+<ul>
+<li>task-level 依赖关系，</li>
+<li>DAG 结构，</li>
+<li>数据本地性，</li>
+<li>容器/虚机迁移开销，</li>
+<li>训练/推理任务差异等更细粒度问题。</li>
+</ul>
+<h3 id="网络假设偏理想化">网络假设偏理想化</h3>
+<p>论文在空间迁移中基本忽略了传输损耗和时延，这对宏观规划研究可以接受，但对真实系统落地会偏理想。</p>
+<h3 id="更偏优化不是在线控制">更偏优化，不是在线控制</h3>
+<p>它本质上仍是优化调度模型，不是面向在线闭环执行的实时算法框架。</p>
+<h2 id="对当前研究项目的启发">对当前研究/项目的启发</h2>
+<p>如果把这篇论文放到“电力指令驱动的计算负荷响应”这个场景下，它至少有四点启发：</p>
+<h3 id="可以借用任务分类思路">可以借用任务分类思路</h3>
+<p>可将任务划分为：</p>
+<ul>
+<li>不可调任务；</li>
+<li>时间可移任务；</li>
+<li>空间可移任务；</li>
+<li>资源弹性可调任务。</li>
+</ul>
+<p>这对构建“任务-功耗-电力响应”映射模型非常有帮助。</p>
+<h3 id="可以借用其-formulation-结构">可以借用其 formulation 结构</h3>
+<p>论文已经给出了一个比较清晰的电力-算力协同建模框架，可用于你写：</p>
+<ul>
+<li>问题定义；</li>
+<li>系统模型；</li>
+<li>变量与约束；</li>
+<li>目标函数；</li>
+<li>研究内容中的形式化描述。</li>
+</ul>
+<h3 id="它适合作为优化基线">它适合作为“优化基线”</h3>
+<p>后续若想引入强化学习、扩散模型、快慢路径协同调度，这篇论文可以作为一个非常合适的<strong>优化基线</strong>。</p>
+<h3 id="它支持省域跨区域协同叙事">它支持“省域跨区域协同”叙事</h3>
+<p>论文中的“东部高需求-西部高新能源”逻辑，与当前省域/跨域算电协同项目背景高度契合。</p>
+<p><strong>该论文的本质贡献，是把数据中心中的可延后、可迁移任务建模为电力系统可调用的柔性负荷，并在风光与任务双重不确定下，用数据驱动的分布鲁棒优化方法实现了电力-算力跨区域协同调度。</strong></p>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AE%97%E7%BD%91%E8%B0%83%E5%BA%A6/">算网调度</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%94%B5%E7%AE%97%E5%8D%8F%E5%90%8C/">电算协同</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/study/2024_Han_4level/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">A novel 4-level joint optimal dispatch for demand response of data centers with district autonomy realization</span></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "425fbc70e214017e1480cc9681e8e80e",
+            repo: "_comments",
+            owner: "AryCra07",
+            clientID: "Ov23lioMrznK5GXctggc",
+            clientSecret: "124913c2b8b9514c8997e71d92e5a96d5edf4db8",
+            admin: ["AryCra07"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 10,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/images/avatar_devin.jpg" alt="AryCra07"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">AryCra07</p><p class="is-size-6 is-block">偏坐金鞍调白羽，纷纷射杀五单于</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">9</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">1</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">12</p></a></div></div></nav><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/AryCra07"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="E-Mail" href="mailto:703810491@qq.com"><i class="fa fa-envelope"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#基本信息"><span class="level-left"><span class="level-item">1</span><span class="level-item">基本信息</span></span></a></li><li><a class="level is-mobile" href="#背景与问题"><span class="level-left"><span class="level-item">2</span><span class="level-item">背景与问题</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#背景"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">背景</span></span></a></li><li><a class="level is-mobile" href="#核心矛盾"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">核心矛盾</span></span></a></li></ul></li><li><a class="level is-mobile" href="#论文的主要创新点"><span class="level-left"><span class="level-item">3</span><span class="level-item">论文的主要创新点</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#构建了考虑时空响应的电力-算力协同调度模型"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">构建了考虑时空响应的电力-算力协同调度模型</span></span></a></li><li><a class="level is-mobile" href="#提出了更真实的不确定场景生成与改进-dro-方法"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">提出了更真实的不确定场景生成与改进
+DRO 方法</span></span></a></li><li><a class="level is-mobile" href="#从多维指标评估了算力资源对电力系统的调节价值"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">从多维指标评估了算力资源对电力系统的调节价值</span></span></a></li></ul></li><li><a class="level is-mobile" href="#论文整体技术路线"><span class="level-left"><span class="level-item">4</span><span class="level-item">论文整体技术路线</span></span></a></li><li><a class="level is-mobile" href="#论文方法"><span class="level-left"><span class="level-item">5</span><span class="level-item">论文方法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#数据中心能耗建模"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">数据中心能耗建模</span></span></a></li><li><a class="level is-mobile" href="#计算任务分类"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">计算任务分类</span></span></a></li><li><a class="level is-mobile" href="#时间响应建模任务如何时间平移"><span class="level-left"><span class="level-item">5.3</span><span class="level-item">时间响应建模：任务如何“时间平移”</span></span></a></li><li><a class="level is-mobile" href="#空间响应建模任务如何跨区域迁移"><span class="level-left"><span class="level-item">5.4</span><span class="level-item">空间响应建模：任务如何“跨区域迁移”</span></span></a></li></ul></li><li><a class="level is-mobile" href="#协同优化模型目标函数和约束"><span class="level-left"><span class="level-item">6</span><span class="level-item">协同优化模型：目标函数和约束</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#目标函数"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">目标函数</span></span></a></li><li><a class="level is-mobile" href="#主要约束"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">主要约束</span></span></a></li></ul></li><li><a class="level is-mobile" href="#不确定性处理为什么要用-dro"><span class="level-left"><span class="level-item">7</span><span class="level-item">不确定性处理：为什么要用 DRO</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#不确定来源"><span class="level-left"><span class="level-item">7.1</span><span class="level-item">不确定来源</span></span></a></li><li><a class="level is-mobile" href="#场景生成方法"><span class="level-left"><span class="level-item">7.2</span><span class="level-item">场景生成方法</span></span></a></li><li><a class="level is-mobile" href="#为什么不是随机优化或鲁棒优化"><span class="level-left"><span class="level-item">7.3</span><span class="level-item">为什么不是随机优化或鲁棒优化</span></span></a></li></ul></li><li><a class="level is-mobile" href="#改进-dro-的关键点"><span class="level-left"><span class="level-item">8</span><span class="level-item">改进 DRO 的关键点</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#经典问题"><span class="level-left"><span class="level-item">8.1</span><span class="level-item">经典问题</span></span></a></li><li><a class="level is-mobile" href="#改进方式"><span class="level-left"><span class="level-item">8.2</span><span class="level-item">改进方式</span></span></a></li></ul></li><li><a class="level is-mobile" href="#求解方法ccg-算法"><span class="level-left"><span class="level-item">9</span><span class="level-item">求解方法：C&amp;CG 算法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#基本思路"><span class="level-left"><span class="level-item">9.1</span><span class="level-item">基本思路</span></span></a></li></ul></li><li><a class="level is-mobile" href="#实验设计"><span class="level-left"><span class="level-item">10</span><span class="level-item">实验设计</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#仿真场景设置"><span class="level-left"><span class="level-item">10.1</span><span class="level-item">仿真场景设置</span></span></a></li><li><a class="level is-mobile" href="#评价指标"><span class="level-left"><span class="level-item">10.2</span><span class="level-item">评价指标</span></span></a></li><li><a class="level is-mobile" href="#场景对比设计"><span class="level-left"><span class="level-item">10.3</span><span class="level-item">场景对比设计</span></span></a></li></ul></li><li><a class="level is-mobile" href="#主要实验结果"><span class="level-left"><span class="level-item">11</span><span class="level-item">主要实验结果</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#时空调节确实有效"><span class="level-left"><span class="level-item">11.1</span><span class="level-item">时空调节确实有效</span></span></a></li><li><a class="level is-mobile" href="#算力时空调节能够平滑净负荷曲线"><span class="level-left"><span class="level-item">11.2</span><span class="level-item">算力时空调节能够平滑净负荷曲线</span></span></a></li><li><a class="level is-mobile" href="#dro-在经济性与稳健性之间更平衡"><span class="level-left"><span class="level-item">11.3</span><span class="level-item">DRO
+在经济性与稳健性之间更平衡</span></span></a></li><li><a class="level is-mobile" href="#样本越多dro-越不保守"><span class="level-left"><span class="level-item">11.4</span><span class="level-item">样本越多，DRO 越不保守</span></span></a></li><li><a class="level is-mobile" href="#置信水平越高决策越保守"><span class="level-left"><span class="level-item">11.5</span><span class="level-item">置信水平越高，决策越保守</span></span></a></li></ul></li><li><a class="level is-mobile" href="#13-实证案例山东蒙西"><span class="level-left"><span class="level-item">12</span><span class="level-item">13. 实证案例：山东—蒙西</span></span></a></li><li><a class="level is-mobile" href="#论文局限性"><span class="level-left"><span class="level-item">13</span><span class="level-item">论文局限性</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#时间尺度较粗"><span class="level-left"><span class="level-item">13.1</span><span class="level-item">时间尺度较粗</span></span></a></li><li><a class="level is-mobile" href="#任务粒度较粗"><span class="level-left"><span class="level-item">13.2</span><span class="level-item">任务粒度较粗</span></span></a></li><li><a class="level is-mobile" href="#网络假设偏理想化"><span class="level-left"><span class="level-item">13.3</span><span class="level-item">网络假设偏理想化</span></span></a></li><li><a class="level is-mobile" href="#更偏优化不是在线控制"><span class="level-left"><span class="level-item">13.4</span><span class="level-item">更偏优化，不是在线控制</span></span></a></li></ul></li><li><a class="level is-mobile" href="#对当前研究项目的启发"><span class="level-left"><span class="level-item">14</span><span class="level-item">对当前研究/项目的启发</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#可以借用任务分类思路"><span class="level-left"><span class="level-item">14.1</span><span class="level-item">可以借用任务分类思路</span></span></a></li><li><a class="level is-mobile" href="#可以借用其-formulation-结构"><span class="level-left"><span class="level-item">14.2</span><span class="level-item">可以借用其 formulation 结构</span></span></a></li><li><a class="level is-mobile" href="#它适合作为优化基线"><span class="level-left"><span class="level-item">14.3</span><span class="level-item">它适合作为“优化基线”</span></span></a></li><li><a class="level is-mobile" href="#它支持省域跨区域协同叙事"><span class="level-left"><span class="level-item">14.4</span><span class="level-item">它支持“省域跨区域协同”叙事</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/images/icon1.jpg" alt="AryCra07&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2026 AryCra_07</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
